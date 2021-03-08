@@ -14,27 +14,33 @@
 
                 <h6>Data Diri</h6>
 
-                <div class="form-row my-3 profile-pic-div">
+                <!-- <div class="form-row my-3 profile-pic-div">
                     <img src="assets/img/perfil.jpg" id="photo">
                     <input type="file" id="file">
                     <label for="file" id="uploadBtn">Choose Photo</label>
-                </div>
+                </div> -->
 
                 <div class="form-row">
                     <div class="col-lg-7">
-                        <input type="name" placeholder="Name" class="form-control my-3 p-4">
+                        <input type="text" name="nama" placeholder="Nama" class="form-control my-3 p-4">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="col-lg-7">
-                        <input type="NRP" placeholder="NRP" class="form-control my-3 p-4">
+                        <input type="text" name="nrp" placeholder="NRP" class="form-control my-3 p-4">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="col-lg-7">
-                        <input type="email" placeholder="Email" class="form-control my-3 p-4">
+                        <input type="text" name="email" placeholder="Email" class="form-control my-3 p-4">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-lg-7">
+                        <input type="text" name="no_telp" placeholder="No Handphone" class="form-control my-3 p-4">
                     </div>
                 </div>
 

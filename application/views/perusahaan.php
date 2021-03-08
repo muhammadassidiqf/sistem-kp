@@ -17,7 +17,7 @@
 
                  <div class="form-row">
                      <div class="col-lg-7">
-                         <select type="name" placeholder="Name" class="form-control my-3 p-4">
+                         <select type="text" name="nama" placeholder="Name" class="form-control my-3 p-4">
                              <option value=""> PT. Len Industri</option>
                              <option value=""> PT. Indofood</option>
                          </select>
@@ -26,30 +26,33 @@
 
                  <div class="form-row">
                      <div class="col-lg-7">
-                         <input type="Alamat" placeholder="Alamat" class="form-control my-3 p-4">
+                         <input type="text" name="alamat" placeholder="Alamat" class="form-control my-3 p-4">
                      </div>
                  </div>
 
                  <div class="form-row">
                      <div class="col-lg-7">
-                         <input type="Pembimbing" placeholder="Pembimbing" class="form-control my-3 p-4">
+                         <input type="text" name="nama" placeholder="Pembimbing" class="form-control my-3 p-4">
                      </div>
                  </div>
 
                  <div class="form-row">
                      <div class="col-lg-7">
-                         <input type="email" placeholder="Email" class="form-control my-3 p-4">
+                         <input type="text" name="email" placeholder="Email" class="form-control my-3 p-4">
                      </div>
                  </div>
 
                  <div class="form-row">
                      <div class="col-lg-7">
-                         <input type="phone-number" placeholder="No. WhatsApp" class="form-control my-3 p-4">
+                         <input type="text" name="no_telp" placeholder="No Telp" class="form-control my-3 p-4">
+                     </div>
+                 </div>
+                 <div class="form-row">
+                     <div class="col-lg-7">
+                         <button type="submit" class="btn1 mt-3 mb-5">Submit</button>
                      </div>
                  </div>
              </div>
-
-
 
          </div>
      </div>

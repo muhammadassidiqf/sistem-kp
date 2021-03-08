@@ -27,13 +27,29 @@ class Auth extends CI_Controller
         $username = $_POST['username'];
         $password = $_POST['password'];
 
-        if ($username == 'admin' and $password == 'admin') {
-            redirect('dashboard');
+        // var_dump($user);
+        // die;
+        if ($username) {
+            $user = $this->db->get_where('user', ['username' => $username])->row_array();
+            if ($password == $user['password']) {
+                $data = [
+                    'user' => $user
+                ];
+                $this->session->set_userdata($data);
+                redirect('dashboard');
+            } else {
+                redirect('/');
+            }
+            // var_dump($username);
+            // die;
+        } else {
+            redirect('/');
         }
     }
 
     public function logout()
     {
+        $this->session->sess_destroy();
         redirect('/');
     }
 }

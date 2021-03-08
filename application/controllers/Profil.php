@@ -12,6 +12,10 @@ class Profil extends CI_Controller
 
     public function index()
     {
-        $this->template->load('layouts', 'profil/mahasiswa');
+        $user = $this->session->userdata('user');
+        $data = [
+            'user' => $user
+        ];
+        $this->template->load('layouts', 'profil/mahasiswa', $data);
     }
 }

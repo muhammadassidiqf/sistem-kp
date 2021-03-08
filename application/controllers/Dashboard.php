@@ -12,6 +12,22 @@ class Dashboard extends CI_Controller
 
     public function index()
     {
-        $this->template->load('layouts', 'dashboard/dashboard_mhs');
+        $user = $this->session->userdata('user');
+        if ($user['role'] == 'Mahasiswa') {
+            $data = [
+                'user' => $user
+            ];
+            $this->template->load('layouts', 'dashboard/dashboard_mhs', $data);
+        } elseif ($user['role'] == 'Dosen') {
+            $data = [
+                'user' => $user
+            ];
+            $this->template->load('layouts', 'dashboard/dashboard_dsn', $data);
+        } elseif ($user['role'] == 'Koordinator') {
+            $data = [
+                'user' => $user
+            ];
+            $this->template->load('layouts', 'dashboard/dashboard_koor', $data);
+        }
     }
 }

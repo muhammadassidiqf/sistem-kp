@@ -12,6 +12,10 @@ class Perusahaan extends CI_Controller
 
     public function index()
     {
-        $this->template->load('layouts', 'perusahaan');
+        $user = $this->session->userdata('user');
+        $data = [
+            'user' => $user
+        ];
+        $this->template->load('layouts', 'perusahaan', $data);
     }
 }
