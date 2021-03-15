@@ -61,4 +61,13 @@ class Model_All extends CI_Model
 
         return false;
     }
+
+    public function get_profil()
+    {
+        $user = $this->session->userdata('user');
+        if ($user['role'] == 'Mahasiswa') {
+            $data = $this->db->select('*')->from('user')->join('mahasiswa', 'mahasiswa.nrp = user.username', 'left')->where('mahasiswa.nrp = ' . $user['username'] . '')->get()->row_array();
+        }
+        return $data;
+    }
 }

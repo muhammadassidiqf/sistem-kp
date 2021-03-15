@@ -8,15 +8,22 @@ class Dashboard extends CI_Controller
         parent::__construct();
         $this->load->library('form_validation');
         $this->load->library('session');
+        $this->load->model('model_all');
     }
 
     public function index()
     {
         $user = $this->session->userdata('user');
         if ($user['role'] == 'Mahasiswa') {
+            $mhs = $this->model_all->get_mahasiswaid();
+            $riwayat = $this->db->where('id_mahasiswa', $mhs['id_mahasiswa'])
+                ->get('kp')->num_rows();
             $data = [
-                'user' => $user
+                'user' => $user,
+                'riwayat' => $riwayat
             ];
+            // var_dump($data);
+            // die;
             $this->template->load('layouts', 'dashboard/dashboard_mhs', $data);
         } elseif ($user['role'] == 'Dosen') {
             $data = [
