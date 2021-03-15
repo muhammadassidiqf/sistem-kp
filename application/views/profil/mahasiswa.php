@@ -56,6 +56,13 @@
         </div>
     </div>
 </div>
+<footer class="sticky-footer bg-transparant">
+    <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+            <span>Copyright &copy; IOS Developer 2021</span>
+        </div>
+    </div>
+</footer>
 <div class="modal fade" id="modal_edit<?= $prof['id_mahasiswa'] ?>" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -103,12 +110,5 @@
         </div>
     </div>
 </div>
-<footer class="sticky-footer bg-white">
-    <div class="container my-auto">
-        <div class="copyright text-center my-auto">
-            <span>Copyright &copy; IOS Developer 2021</span>
-        </div>
-    </div>
-</footer>
 
 </div>
