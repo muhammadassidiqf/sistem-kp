@@ -11,41 +11,40 @@
 
             <div class="col-lg-9 mb-4">
 
-                <h6></h6>
-
+                <h6>Pengajuan Sidang</h6>
                 <div class="form-row">
                     <div class="col-lg-7">
-                        <input type="NRP" placeholder="NRP" class="form-control my-3 p-4">
+                        <input type="text" name="nrp" placeholder="NRP" class="form-control my-3 p-4" value="<?= $mhs['nrp'] ?>" readonly required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-lg-7">
+                        <input type="text" name="nama" placeholder="Name" class="form-control my-3 p-4" value="<?= $mhs['nama'] ?>" readonly required>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="col-lg-7">
-                        <input type="name" placeholder="Name" class="form-control my-3 p-4">
+                        <input type="text" name="perusahaan" value="<?= $kp['nama_per'] ?>" class="form-control my-3 p-4" readonly>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="col-lg-7">
-                        <input type="phone-number" placeholder="No. WhatsApp" class="form-control my-3 p-4">
+                        <textarea type="text" name="penugasan" class="form-control my-3 p-4" readonly><?= $kp['penugasan'] ?></textarea>
+                    </div>
+                </div>
+
+
+                <div class="form-row">
+                    <div class="col-lg-7">
+                        <input type="text" name="dosen_pemb" value="<?= $kp['nama_pemb'] ?>" class="form-control my-3 p-4" readonly>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="col-lg-7">
-                        <input type="perusahaan" placeholder="Perusahaan KP" class="form-control my-3 p-4">
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="col-lg-7">
-                        <input type="Judul" placeholder="Judul" class="form-control my-3 p-4">
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="col-lg-7">
-                        <input type="Pembimbing" placeholder="Dosen Pembimbing" class="form-control my-3 p-4">
+                        <input type="text" name="judul" placeholder="Judul" class="form-control my-3 p-4">
                     </div>
                 </div>
 

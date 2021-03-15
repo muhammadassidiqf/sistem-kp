@@ -60,5 +60,6 @@ $route['pengajuan_kp'] = 'kp/tambah_kp';
 $route['pengajuan_sidang'] = 'kp/aju_sidang';
 $route['bimbingan'] = 'kp/bimbingan';
 $route['perusahaan'] = 'perusahaan';
+$route['add_perusahaan'] = 'perusahaan/tambah';
 $route['sidang'] = 'kp/sidang';
 $route['logout'] = 'auth/logout';

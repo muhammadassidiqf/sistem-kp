@@ -8,55 +8,44 @@
              <h2>Perusahaan</h2>
          </div>
 
-
          <div class="row mb-4">
 
              <div class="col-lg-9 mb-4">
-
-                 <h6>Data Perusahaan</h6>
-
-                 <div class="form-row">
-                     <div class="col-lg-7">
-                         <select type="text" name="nama" placeholder="Name" class="form-control my-3 p-4">
-                             <option value=""> PT. Len Industri</option>
-                             <option value=""> PT. Indofood</option>
-                         </select>
+                 <form action="<?= site_url('add_perusahaan') ?>" method="post">
+                     <h6>Data Perusahaan</h6>
+                     <div class="form-row">
+                         <div class="col-lg-7">
+                             <input type="text" name="nama" placeholder="Nama Perusahaan" class="form-control my-3 p-4">
+                         </div>
                      </div>
-                 </div>
 
-                 <div class="form-row">
-                     <div class="col-lg-7">
-                         <input type="text" name="alamat" placeholder="Alamat" class="form-control my-3 p-4">
+                     <div class="form-row">
+                         <div class="col-lg-7">
+                             <input type="text" name="alamat" placeholder="Alamat" class="form-control my-3 p-4">
+                         </div>
                      </div>
-                 </div>
 
-                 <div class="form-row">
-                     <div class="col-lg-7">
-                         <input type="text" name="nama" placeholder="Pembimbing" class="form-control my-3 p-4">
+                     <div class="form-row">
+                         <div class="col-lg-7">
+                             <input type="text" name="email" placeholder="Email" class="form-control my-3 p-4">
+                         </div>
                      </div>
-                 </div>
 
-                 <div class="form-row">
-                     <div class="col-lg-7">
-                         <input type="text" name="email" placeholder="Email" class="form-control my-3 p-4">
+                     <div class="form-row">
+                         <div class="col-lg-7">
+                             <input type="text" name="no_telp" placeholder="No Telp" class="form-control my-3 p-4">
+                         </div>
                      </div>
-                 </div>
-
-                 <div class="form-row">
-                     <div class="col-lg-7">
-                         <input type="text" name="no_telp" placeholder="No Telp" class="form-control my-3 p-4">
+                     <div class="form-row">
+                         <div class="col-lg-7">
+                             <button type="submit" class="btn1 mt-3 mb-5">Submit</button>
+                         </div>
                      </div>
-                 </div>
-                 <div class="form-row">
-                     <div class="col-lg-7">
-                         <button type="submit" class="btn1 mt-3 mb-5">Submit</button>
-                     </div>
-                 </div>
+                 </form>
              </div>
 
          </div>
      </div>
-
  </div>
 
  <footer class="sticky-footer bg-white">

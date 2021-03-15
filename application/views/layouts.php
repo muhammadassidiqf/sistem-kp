@@ -10,22 +10,54 @@
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css' rel='stylesheet'>
 
     <!-- ===== CSS ===== -->
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/jquery-ui-1.12.1/jquery-ui.css">
     <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/DataTables/datatables.min.css">
     <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/select2/dist/css/select2.min.css">
     <link rel="stylesheet" href="<?= base_url(); ?>assets/vendor/select2-bootstrap4-theme/dist/select2-bootstrap4.min.css">
     <link rel="stylesheet" href="<?= base_url(); ?>assets/css/styles.css">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <script src="<?= base_url('assets/vendor/jquery/jquery-3.5.1.min.js') ?>"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script> -->
     <script src="<?= base_url('assets/vendor/DataTables/datatables.min.js') ?>"></script>
     <script src="<?= base_url('assets/vendor/select2/dist/js/select2.min.js'); ?>"></script>
     <script type="text/javascript" src="<?= base_url('assets/vendor/sweetalert/sweetalert2.all.min.js'); ?>"></script>
     <title>Sistem KP ITENAS</title>
 </head>
+<style>
+    .valid {
+        color: green;
+        margin-bottom: auto;
+    }
+
+    .valid:before {
+        position: relative;
+        left: -35px;
+    }
+
+    /* Add a red text color and an "x" icon when the requirements are wrong */
+    .invalid {
+        color: red;
+        margin-bottom: auto;
+    }
+
+    .invalid:before {
+        position: relative;
+        left: -35px;
+    }
+
+    .fa-circle {
+        font-size: 6px;
+    }
+
+    .fa-check {
+        color: green;
+    }
+</style>
 
 <body id="body-pd">
 
@@ -64,6 +96,12 @@
                             <i class='bx bx-user nav__icon'></i>
                             <span class="nav__name">Profil</span>
                         </a>
+                        <?php if ($user['role'] == 'Dosen') { ?>
+                            <a href="<?= site_url('masuk') ?>" class="nav__link">
+                                <i class="fas fa-sign-in-alt"></i>
+                                <span class="nav__name">Kotak Masuk</span>
+                            </a>
+                        <?php } ?>
                         <?php if ($user['role'] == 'Mahasiswa') { ?>
                             <li class="nav__item dropdown">
                                 <a class="nav__link dropdown__link">
@@ -72,8 +110,10 @@
                                     <i class='bx bx-chevron-down dropdown__icon'></i>
                                 </a>
                                 <ul class="dropdown__menu">
-                                    <li class="dropdown__item"><a href="<?= site_url('pengajuan') ?>" style="margin-left: -10px;" class="nav__link"><i class="fas fa-briefcase"></i>Pengajuan
-                                            KP</a></li>
+                                    <?php if ($num_kp < 1) { ?>
+                                        <li class="dropdown__item"><a href="<?= site_url('pengajuan') ?>" style="margin-left: -10px;" class="nav__link"><i class="fas fa-briefcase"></i>Pengajuan
+                                                KP</a></li>
+                                    <?php } ?>
                                     <li class="dropdown__item"><a href="<?= site_url('pengajuan_sidang') ?>" style="margin-left: -10px;" class="nav__link"><i class="fas fa-clipboard-check"></i>Pengajuan
                                             Sidang</a></li>
                                 </ul>

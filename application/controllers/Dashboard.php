@@ -20,7 +20,7 @@ class Dashboard extends CI_Controller
                 ->get('kp')->num_rows();
             $data = [
                 'user' => $user,
-                'riwayat' => $riwayat
+                'num_kp' => $riwayat,
             ];
             // var_dump($data);
             // die;

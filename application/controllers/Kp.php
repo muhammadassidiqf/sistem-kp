@@ -18,7 +18,7 @@ class Kp extends CI_Controller
             'user' => $user,
             'perusahaan' => $this->model_all->get_perusahaan(),
             'mhs' => $this->model_all->get_mahasiswaid(),
-            'dosen' => $this->model_all->get_dosen()
+            'dosen' => $this->model_all->get_dosen(),
         ];
         $this->template->load('layouts', 'kp/aju_kp', $data);
     }
@@ -27,16 +27,24 @@ class Kp extends CI_Controller
     {
         $user = $this->session->userdata('user');
         $data = [
-            'user' => $user
+            'user' => $user,
+            'mhs' => $this->model_all->get_mahasiswaid(),
+            'kp' => $this->model_all->get_kp()
         ];
         $this->template->load('layouts', 'kp/aju_sidang', $data);
+        // var_dump($data);
+        // die;
     }
 
     public function bimbingan()
     {
         $user = $this->session->userdata('user');
+        $mhs = $this->model_all->get_mahasiswaid();
+        $riwayat = $this->db->where('id_mahasiswa', $mhs['id_mahasiswa'])
+            ->get('kp')->num_rows();
         $data = [
-            'user' => $user
+            'user' => $user,
+            'num_kp' => $riwayat
         ];
         $this->template->load('layouts', 'kp/bimbingan', $data);
     }
@@ -44,8 +52,12 @@ class Kp extends CI_Controller
     public function sidang()
     {
         $user = $this->session->userdata('user');
+        $mhs = $this->model_all->get_mahasiswaid();
+        $riwayat = $this->db->where('id_mahasiswa', $mhs['id_mahasiswa'])
+            ->get('kp')->num_rows();
         $data = [
-            'user' => $user
+            'user' => $user,
+            'num_kp' => $riwayat,
         ];
         $this->template->load('layouts', 'kp/sidang', $data);
     }
@@ -56,7 +68,7 @@ class Kp extends CI_Controller
         $this->form_validation->set_rules('nama', 'nama', 'required');
         $this->form_validation->set_rules('no_telp', 'no_telp', 'required');
         $this->form_validation->set_rules('perusahaan', 'perusahaan', 'required');
-        $this->form_validation->set_rules('penugasan', 'nama', 'required');
+        $this->form_validation->set_rules('penugasan', 'penugasan', 'required');
         if ($this->form_validation->run() == FALSE) {
             redirect('pengajuan');
         } else {
