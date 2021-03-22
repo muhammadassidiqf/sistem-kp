@@ -17,14 +17,22 @@ class Profil extends CI_Controller
         $mhs = $this->model_all->get_mahasiswaid();
         $riwayat = $this->db->where('id_mahasiswa', $mhs['id_mahasiswa'])
             ->get('kp')->num_rows();
-        $data = [
-            'user' => $user,
-            'prof' => $this->model_all->get_profil(),
-            'num_kp' => $riwayat,
-        ];
-        $this->template->load('layouts', 'profil/mahasiswa', $data);
-        // var_dump($data);
-        // die;
+        if ($user['role'] == 'Mahasiswa') {
+            $data = [
+                'user' => $user,
+                'prof' => $this->model_all->get_profil(),
+                'num_kp' => $riwayat,
+            ];
+            // var_dump($data);
+            // die;
+            $this->template->load('layouts', 'profil/mahasiswa', $data);
+        } elseif ($user['role'] == 'Dosen' || $user['role'] == 'Koordinator') {
+            $data = [
+                'user' => $user,
+                'prof' => $this->model_all->get_profil_dsn(),
+            ];
+            $this->template->load('layouts', 'profil/dosen', $data);
+        }
     }
 
     public function edit()
@@ -50,9 +58,37 @@ class Profil extends CI_Controller
                 ];
                 $this->db->where('nrp', $_POST['nrp']);
                 $this->db->update('mahasiswa', $data);
+            } elseif ($user['role'] == 'Dosen' || $user['role'] == 'Koordinator') {
+                $password = [
+                    'password' => $_POST['newpass']
+                ];
+                $this->db->where('username', $user['username']);
+                $this->db->update('user', $password);
+                $data = [
+                    'email' => $_POST['email'],
+                    'no_telp' => $_POST['no_telp'],
+                ];
+                $this->db->where('nik', $_POST['nik']);
+                $this->db->update('dosen', $data);
             }
             $this->session->set_flashdata('suksesubah', "Data Berhasil Diubah");
             redirect('profil');
         }
+    }
+
+    public function masuk()
+    {
+        $user = $this->session->userdata('user');
+        $mhs = $this->model_all->get_mahasiswaid();
+        $riwayat = $this->db->where('id_mahasiswa', $mhs['id_mahasiswa'])
+            ->get('kp')->num_rows();
+        $data = [
+            'user' => $user,
+            'num_kp' => $riwayat,
+            'kp' => $this->model_all->masuk()
+        ];
+        // var_dump($data);
+        // die;
+        $this->template->load('layouts', 'masuk', $data);
     }
 }

@@ -69,8 +69,9 @@
                 <i class='bx bx-menu' id="header-toggle"></i>
             </div>
 
-            <h4>Sistem Kerja Praktik ITENAS</h4>
-
+            <span style="text-align: center;">
+                <h4>Sistem Kerja Praktik ITENAS</h4>
+            </span>
             <div class="header__img">
                 <img src="assets/img/programmer.svg" alt="">
             </div>
@@ -96,12 +97,10 @@
                             <i class='bx bx-user nav__icon'></i>
                             <span class="nav__name">Profil</span>
                         </a>
-                        <?php if ($user['role'] == 'Dosen') { ?>
-                            <a href="<?= site_url('masuk') ?>" class="nav__link">
-                                <i class="fas fa-sign-in-alt"></i>
-                                <span class="nav__name">Kotak Masuk</span>
-                            </a>
-                        <?php } ?>
+                        <a href="<?= site_url('masuk') ?>" class="nav__link">
+                            <i class="fas fa-sign-in-alt"></i>
+                            <span class="nav__name">Kotak Masuk</span>
+                        </a>
                         <?php if ($user['role'] == 'Mahasiswa') { ?>
                             <li class="nav__item dropdown">
                                 <a class="nav__link dropdown__link">
@@ -114,8 +113,10 @@
                                         <li class="dropdown__item"><a href="<?= site_url('pengajuan') ?>" style="margin-left: -10px;" class="nav__link"><i class="fas fa-briefcase"></i>Pengajuan
                                                 KP</a></li>
                                     <?php } ?>
-                                    <li class="dropdown__item"><a href="<?= site_url('pengajuan_sidang') ?>" style="margin-left: -10px;" class="nav__link"><i class="fas fa-clipboard-check"></i>Pengajuan
-                                            Sidang</a></li>
+                                    <?php if ($num_kp >= 1) { ?>
+                                        <li class="dropdown__item"><a href="<?= site_url('pengajuan_sidang') ?>" style="margin-left: -10px;" class="nav__link"><i class="fas fa-clipboard-check"></i>Pengajuan
+                                                Sidang</a></li>
+                                    <?php } ?>
                                 </ul>
                             </li>
                         <?php } ?>
@@ -142,7 +143,30 @@
         </div>
         <?= $contents ?>
     </div>
+    <div class="modal" id="modal_kp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 50px;">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <i class="fa fa-spinner fa-spin"></i>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
+        jQuery(document).ready(function($) {
+            $('#modal_kp').on('show.bs.modal', function(e) {
+                var button = $(e.relatedTarget);
+                var modal = $(this);
+                modal.find('.modal-body').load(button.data("remote"));
+                modal.find('.modal-title').html(button.data("title"));
+            });
+        });
         $(document).on('click', '.toggle-new', function() {
 
             $(this).toggleClass("fa-eye fa-eye-slash");

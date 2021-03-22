@@ -25,10 +25,10 @@
                         <input type="text" name="nama" value="<?= $prof['nama'] ?>" class="form-control my-0 p-4" readonly>
                     </div>
                 </div>
-                <label for="nrp" class="col-sm-2 col-form-label">NRP</label>
+                <label for="nrp" class="col-sm-2 col-form-label">No Pegawai</label>
                 <div class="form-row">
                     <div class="col-lg-7">
-                        <input type="text" name="nrp" value="<?= $prof['nrp'] ?>" class="form-control my-0 p-4" readonly>
+                        <input type="text" name="nrp" value="<?= $prof['nik'] ?>" class="form-control my-0 p-4" readonly>
                     </div>
                 </div>
                 <label for="email" class="col-sm-2 col-form-label">E-Mail</label>
@@ -46,7 +46,7 @@
 
                 <div class="form-row">
                     <div class="col-lg-7">
-                        <button type="button" data-toggle="modal" data-target="#modal_edit<?= $prof['id_mahasiswa']; ?>" class="btn-mhs btn btn-lg font-weight-bold btn-primary my-2">
+                        <button type="button" data-toggle="modal" data-target="#modal_edit<?= $prof['id_dosen']; ?>" class="btn-mhs btn btn-lg font-weight-bold btn-primary my-2">
                             Edit
                         </button>
                         <!-- <a href="" data-toggle="modal" data-target="#modal_edit<?= $prof['id_mahasiswa']; ?>" class="btn-mhs btn btn-lg font-weight-bold btn-primary">Edit</a> -->
@@ -63,7 +63,7 @@
         </div>
     </div>
 </footer>
-<div class="modal fade" id="modal_edit<?= $prof['id_mahasiswa'] ?>" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+<div class="modal fade" id="modal_edit<?= $prof['id_dosen'] ?>" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -74,7 +74,7 @@
                 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input name="nrp" id="nrp" class="form-control" value="<?= $prof['nrp']; ?>" type="hidden" readonly required>
+                        <input name="nik" id="nik" class="form-control" value="<?= $prof['nik']; ?>" type="hidden" readonly required>
                         <label class="control-label col-xs-3">E-mail</label>
                         <div class="col-xs-8">
                             <input name="email" id="email" class="form-control" value="<?= $prof['email']; ?>" type="text" required placeholder="e.g : massidiqfattah@mhs.itenas.ac.id">

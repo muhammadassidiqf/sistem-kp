@@ -55,6 +55,7 @@ $route['translate_uri_dashes'] = FALSE;
 $route['dashboard'] = 'dashboard';
 $route['profil'] = 'profil';
 $route['edit_profil'] = 'profil/edit';
+$route['masuk'] = 'profil/masuk';
 $route['pengajuan'] = 'kp';
 $route['pengajuan_kp'] = 'kp/tambah_kp';
 $route['pengajuan_sidang'] = 'kp/aju_sidang';
