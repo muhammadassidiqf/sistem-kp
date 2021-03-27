@@ -132,7 +132,7 @@ class Kp extends CI_Controller
         }
     }
 
-    public function edit_kp()
+    public function edit_kp($id)
     {
         $user = $this->session->userdata('user');
         $mhs = $this->model_all->get_mahasiswaid();
@@ -141,7 +141,7 @@ class Kp extends CI_Controller
         $data = [
             'user' => $user,
             'num_kp' => $riwayat,
-            'kp' => $this->model_all->masuk(),
+            'kp' => $this->model_all->get_kpid($id),
             'dosen' => $this->model_all->get_dosen(),
         ];
         if ($user['role'] == 'Dosen' || $user['role'] == 'Koordinator') {

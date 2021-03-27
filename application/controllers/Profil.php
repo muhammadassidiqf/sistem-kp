@@ -85,7 +85,7 @@ class Profil extends CI_Controller
         $data = [
             'user' => $user,
             'num_kp' => $riwayat,
-            'kp' => $this->model_all->masuk()
+            'masuk' => $this->model_all->masuk()
         ];
         // var_dump($data);
         // die;
