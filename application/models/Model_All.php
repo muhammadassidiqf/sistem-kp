@@ -94,6 +94,68 @@ class Model_All extends CI_Model
         return false;
     }
 
+    public function pemeriksa2_sidang()
+    {
+        $last = $this->db->select('id_sidang')
+            ->order_by('id_sidang', 'desc')
+            ->limit(1)
+            ->get('sidang')->row_array();
+        $koor = $this->db->select('*')->from('user')->where('role = "Koordinator"')->get()->row_array();
+        $pemeriksa = $this->db->select('*')->from('dosen')->where('nik=' . $koor['username'] . '')->get()->row_array();
+        $data = [
+            'id_dsn' => $pemeriksa['id_dosen'],
+            'id_sidang' => $last['id_sidang'],
+            'statuspemeriksa2' => 'Tertunda'
+        ];
+        // print_r($data);
+        $this->db->insert('pemeriksa2', $data);
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function pemeriksa_sidang()
+    {
+        $last = $this->db->select('id_sidang')
+            ->order_by('id_sidang', 'desc')
+            ->limit(1)
+            ->get('sidang')->row_array();
+        $data = [
+            'id_dsn' => $_POST['dosen'],
+            'id_sidang' => $last['id_sidang'],
+            'statuspemeriksa' => 'Menunggu'
+        ];
+        // print_r($data);
+        $this->db->insert('pemeriksa', $data);
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function pengirim_sidang()
+    {
+        $last = $this->db->select('id_sidang')
+            ->order_by('id_sidang', 'desc')
+            ->limit(1)
+            ->get('sidang')->row_array();
+        $data = [
+            'id_mhs' => $_POST['id_mhs'],
+            'id_sidang' => $last['id_sidang'],
+            'statuspengirim' => 'Menunggu'
+        ];
+        // print_r($data);
+        $this->db->insert('pengirim', $data);
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
     public function get_profil()
     {
         $user = $this->session->userdata('user');

@@ -58,6 +58,7 @@ $route['edit_profil'] = 'profil/edit';
 $route['masuk'] = 'profil/masuk';
 $route['pengajuan'] = 'kp';
 $route['pengajuan_kp'] = 'kp/tambah_kp';
+$route['pengajuan_sidangkp'] = 'kp/tambah_sidang';
 $route['pengajuan_sidang'] = 'kp/aju_sidang';
 $route['bimbingan'] = 'kp/bimbingan';
 $route['perusahaan'] = 'perusahaan';

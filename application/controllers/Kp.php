@@ -101,6 +101,37 @@ class Kp extends CI_Controller
         }
     }
 
+    public function tambah_sidang()
+    {
+        $this->form_validation->set_rules('id_kp', 'id_kp', 'required');
+        $this->form_validation->set_rules('dosen_pemb', 'dosen_pemb', 'required');
+        $this->form_validation->set_rules('tgl_pengajuan', 'tgl_pengajuan', 'required');
+        $this->form_validation->set_rules('judul', 'judul', 'required');
+        if ($this->form_validation->run() == FALSE) {
+            redirect('pengajuan_sidang');
+        } else {
+            $mhs = $this->model_all->get_mahasiswaid();
+            $data = [
+                'id_mahasiswa' => $mhs['id_mahasiswa'],
+                'id_kp' => $_POST['id_kp'],
+                'tanggal' => date('Y-m-d'),
+                'tgl_pengajuan' => date('Y-m-d', strtotime($_POST['tgl_pengajuan'])),
+                'judul' => $_POST['judul'],
+                'status' => 'Menunggu',
+                'status2' => 'Menunggu'
+            ];
+            // var_dump($data);
+            // die;
+            $sidang = $this->db->insert('sidang', $data);
+            if ($sidang) {
+                $this->model_all->pengirim_sidang();
+                $this->model_all->pemeriksa_sidang();
+                $this->model_all->pemeriksa2_sidang();
+                redirect('dashboard');
+            }
+        }
+    }
+
     public function edit_kp()
     {
         $user = $this->session->userdata('user');
@@ -111,6 +142,7 @@ class Kp extends CI_Controller
             'user' => $user,
             'num_kp' => $riwayat,
             'kp' => $this->model_all->masuk(),
+            'dosen' => $this->model_all->get_dosen(),
         ];
         if ($user['role'] == 'Dosen' || $user['role'] == 'Koordinator') {
             $data['prof'] = $this->model_all->get_profil_dsn();
@@ -152,6 +184,13 @@ class Kp extends CI_Controller
             $this->db->set('statuspengirim', 'Tidak Disetujui')->where('id_kp', $id)->update('pengirim');
         }
         $this->session->set_flashdata('gagal_pemeriksa', "Pengajuan tidak disetujui oleh Anda sebagai pemeriksa!");
+        redirect('masuk');
+    }
+
+    public function update_pemb($id)
+    {
+        $this->db->set('dosen_pemb', $_POST['dosen_pemb'])->where('id_kp', $id)->update('kp');
+        $this->session->set_flashdata('sukses_pemeriksa', "Pengajuan telah disetujui oleh Anda sebagai pemeriksa!");
         redirect('masuk');
     }
 }

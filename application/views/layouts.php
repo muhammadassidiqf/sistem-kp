@@ -113,7 +113,7 @@
                                         <li class="dropdown__item"><a href="<?= site_url('pengajuan') ?>" style="margin-left: -10px;" class="nav__link"><i class="fas fa-briefcase"></i>Pengajuan
                                                 KP</a></li>
                                     <?php } ?>
-                                    <?php if ($num_kp >= 1) { ?>
+                                    <?php if ($num_kp <= 1) { ?>
                                         <li class="dropdown__item"><a href="<?= site_url('pengajuan_sidang') ?>" style="margin-left: -10px;" class="nav__link"><i class="fas fa-clipboard-check"></i>Pengajuan
                                                 Sidang</a></li>
                                     <?php } ?>
@@ -143,7 +143,7 @@
         </div>
         <?= $contents ?>
     </div>
-    <div class="modal" id="modal_kp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 50px;">
+    <div class="modal" id="modal_kp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 50px;overflow:scroll;">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">

@@ -36,7 +36,7 @@
                     <label for="nama_per" class="col-sm-4 col-form-label">Nama Perusahaan</label>
                     <div class="form-row">
                         <div class="col-lg-7">
-                            <select type="text" name="perusahaan" id="pers" placeholder="Nama Perusahaan" class="custom-select custom-select-lg my-0 p-4" required>
+                            <select type="text" name="perusahaan" id="pers" placeholder="Nama Perusahaan" class="form control custom-select custom-select-lg my-0 p-4" required>
                                 <option value="" selected disabled>Pilih Perusahaan</option>
                                 <?php foreach ($perusahaan as $p) { ?>
                                     <option value="<?= $p->id_perusahaan ?>"><?= $p->nama ?></option>
@@ -44,11 +44,11 @@
                             </select>
                         </div>
                     </div>
-                    <!-- <script>
-                            $(document).ready(function() {
-                                $('#pers').select2();
-                            });
-                        </script> -->
+                    <script>
+                        $(document).ready(function() {
+                            $('#pers').select2();
+                        });
+                    </script>
                     <label for="penugasan" class="col-sm-2 col-form-label">Penugasan KP</label>
                     <div class="form-row">
                         <div class="col-lg-7">
@@ -58,7 +58,6 @@
                     <label for="nama" class="col-sm-4 col-form-label">Nama Dosen Wali</label>
                     <div class="form-row">
                         <div class="col-lg-7">
-                            <!-- <input type="text" name="dosen_wali" placeholder="Wali Dosen" class="form-control my-3 p-4"> -->
                             <select type="text" name="dosen" id="dsn" placeholder="Nama Dosen" class="custom-select custom-select-lg my-0 p-4">
                                 <option value="" selected disabled>Pilih Dosen Wali</option>
                                 <?php foreach ($dosen as $d) { ?>
@@ -67,9 +66,11 @@
                             </select>
                         </div>
                     </div>
-                    <!-- <div class="col-lg-7">
-                            <input type="date" name="tanggal" placeholder="Tanggal Pengajuan" class="form-control my-3 p-4" required>
-                        </div> -->
+                    <script>
+                        $(document).ready(function() {
+                            $('#dsn').select2();
+                        });
+                    </script>
                     <div class="form-row">
                         <div class="col-lg-7">
                             <button type="submit" class="btn1 mt-3 mb-5">Submit</button>
