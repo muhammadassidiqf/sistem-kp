@@ -20,15 +20,27 @@
                             <tbody>
                                 <tr>
                                     <td> <b> Judul </b> </td>
-                                    <td><?= $sidang['judul'] ?></td>
+                                    <?php if (!empty($sidang['judul'])) { ?>
+                                        <td><?= $sidang['judul']  ?></td>
+                                    <?php } else { ?>
+                                        <td>-</td>
+                                    <?php } ?>
                                 </tr>
                                 <tr>
                                     <td> <b> Perusahaan </b> </td>
-                                    <td><?= $kp['nama_per'] ?></td>
+                                    <?php if ($kp['nama_per']) { ?>
+                                        <td><?= $kp['nama_per']  ?></td>
+                                    <?php } else { ?>
+                                        <td>-</td>
+                                    <?php } ?>
                                 </tr>
                                 <tr>
                                     <td> <b> Dosen Pembimbing </b> </td>
-                                    <td><?= $kp['nama_pemb'] ?></td>
+                                    <?php if ($kp['nama_pemb']) { ?>
+                                        <td><?= $kp['nama_pemb']  ?></td>
+                                    <?php } else { ?>
+                                        <td>-</td>
+                                    <?php } ?>
                                 </tr>
                                 <tr>
                                     <td> <b> Dosen Penguji </b> </td>
