@@ -47,7 +47,7 @@
                                             <i class="fa fa-eye"></i>
                                         </a>
                                     <?php } elseif (!empty($k->id_sidang)) { ?>
-                                        <a href="" data-remote="<?= site_url('kp/edit_sidang/' . $k->id_sidang) ?>" data-toggle="modal" data-target="#modal_sidang" data-title="Detail Pengajuan Sidang" class="btn btn-info btn-sm" data-dismiss="modal">
+                                        <a href="" data-remote="<?= site_url('kp/edit_sidang/' . $k->id_sidang) ?>" data-toggle="modal" data-target="#modal_kp" data-title="Detail Pengajuan Sidang" class="btn btn-info btn-sm" data-dismiss="modal">
                                             <i class="fa fa-eye"></i>
                                         </a>
                                     <?php } ?>

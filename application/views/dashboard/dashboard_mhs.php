@@ -20,27 +20,24 @@
                             <tbody>
                                 <tr>
                                     <td> <b> Judul </b> </td>
-                                    <td>30 Mahasiswa</td>
+                                    <td><?= $sidang['judul'] ?></td>
                                 </tr>
                                 <tr>
                                     <td> <b> Perusahaan </b> </td>
-                                    <td>20 Mahasiswa</td>
-                                </tr>
-                                <tr>
-                                    <td> <b> Dosen Wali </b> </td>
-                                    <td>Dosen</td>
+                                    <td><?= $sidang['nama_per'] ?></td>
                                 </tr>
                                 <tr>
                                     <td> <b> Dosen Pembimbing </b> </td>
-                                    <td>Dosen</td>
+                                    <td><?= $sidang['nama_pemb'] ?></td>
                                 </tr>
                                 <tr>
                                     <td> <b> Dosen Penguji </b> </td>
-                                    <td>Dosen</td>
+                                    <td><?= $sidang['nama_peng'] ?></td>
                                 </tr>
                                 <tr>
                                     <td> <b> Jadwal Sidang </b> </td>
-                                    <td>Dosen</td>
+                                    <td><?php setlocale(LC_ALL, 'id-ID', 'id_ID');
+                                        echo strftime("%d %B %Y", strtotime($sidang['tgl_pengajuan'])) . "\n"; ?></td>
                                 </tr>
                             </tbody>
                         </table>

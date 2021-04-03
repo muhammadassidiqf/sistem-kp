@@ -21,6 +21,7 @@ class Dashboard extends CI_Controller
             $data = [
                 'user' => $user,
                 'num_kp' => $riwayat,
+                'sidang' => $this->model_all->get_sidang()
             ];
             // var_dump($data);
             // die;
