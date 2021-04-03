@@ -21,9 +21,10 @@ class Kp extends CI_Controller
             'user' => $user,
             'perusahaan' => $this->model_all->get_perusahaan(),
             'mhs' => $this->model_all->get_mahasiswaid(),
-            'dosen' => $this->model_all->get_dosen(),
             'num_kp' => $riwayat
         ];
+        // var_dump($data);
+        // die;
         $this->template->load('layouts', 'kp/aju_kp', $data);
     }
 

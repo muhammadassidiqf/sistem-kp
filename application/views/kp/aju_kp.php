@@ -42,6 +42,7 @@
                                     <option value="<?= $p->id_perusahaan ?>"><?= $p->nama ?></option>
                                 <?php } ?>
                             </select>
+                            <a href="<?= site_url('perusahaan') ?>" class="col-lg-12 btn btn-primary btn-sm my-2">Tambah Perusahaan&nbsp;<i class="fas fa-plus"></i></a>
                         </div>
                     </div>
                     <script>
@@ -58,11 +59,8 @@
                     <label for="nama" class="col-sm-4 col-form-label">Nama Dosen Wali</label>
                     <div class="form-row">
                         <div class="col-lg-7">
-                            <select type="text" name="dosen" id="dsn" placeholder="Nama Dosen" class="custom-select custom-select-lg my-0 p-4">
-                                <option value="" selected disabled>Pilih Dosen Wali</option>
-                                <?php foreach ($dosen as $d) { ?>
-                                    <option value="<?= $d->id_dosen ?>"><?= $d->nama ?></option>
-                                <?php } ?>
+                            <select type="text" name="dosen" id="dsn" placeholder="Nama Dosen" class="custom-select custom-select-lg my-0 p-4" readonly>
+                                <option value="<?= $mhs['id_dosen'] ?>" selected disabled><?= $mhs['dosenwali'] ?></option>
                             </select>
                         </div>
                     </div>

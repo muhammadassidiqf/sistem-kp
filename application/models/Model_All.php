@@ -11,7 +11,7 @@ class Model_All extends CI_Model
     public function get_mahasiswaid()
     {
         $user = $this->session->userdata('user');
-        $mhs = $this->db->select('*')->from('mahasiswa')->where('nrp = ' . $user['username'] . '')->get()->row_array();
+        $mhs = $this->db->select('mahasiswa.*, dosen.id_dosen, dosen.nama as dosenwali')->from('mahasiswa')->join('dosen', 'dosen.id_dosen = mahasiswa.dosen_wali', 'left')->where('nrp = ' . $user['username'] . '')->get()->row_array();
         return $mhs;
     }
 

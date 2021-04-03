@@ -24,20 +24,28 @@
                                 </tr>
                                 <tr>
                                     <td> <b> Perusahaan </b> </td>
-                                    <td><?= $sidang['nama_per'] ?></td>
+                                    <td><?= $kp['nama_per'] ?></td>
                                 </tr>
                                 <tr>
                                     <td> <b> Dosen Pembimbing </b> </td>
-                                    <td><?= $sidang['nama_pemb'] ?></td>
+                                    <td><?= $kp['nama_pemb'] ?></td>
                                 </tr>
                                 <tr>
                                     <td> <b> Dosen Penguji </b> </td>
-                                    <td><?= $sidang['nama_peng'] ?></td>
+                                    <?php if (!empty($sidang['nama_peng'])) { ?>
+                                        <td><?= $sidang['nama_peng'] ?></td>
+                                    <?php } else { ?>
+                                        <td>-</td>
+                                    <?php } ?>
                                 </tr>
                                 <tr>
                                     <td> <b> Jadwal Sidang </b> </td>
-                                    <td><?php setlocale(LC_ALL, 'id-ID', 'id_ID');
-                                        echo strftime("%d %B %Y", strtotime($sidang['tgl_pengajuan'])) . "\n"; ?></td>
+                                    <?php if (!empty($sidang['tgl_pengajuan'])) { ?>
+                                        <td><?php setlocale(LC_ALL, 'id-ID', 'id_ID');
+                                            echo strftime("%d %B %Y", strtotime($sidang['tgl_pengajuan'])) . "\n"; ?></td>
+                                    <?php } else { ?>
+                                        <td>-</td>
+                                    <?php } ?>
                                 </tr>
                             </tbody>
                         </table>
