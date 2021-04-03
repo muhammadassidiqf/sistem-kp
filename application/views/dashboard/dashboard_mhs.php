@@ -28,7 +28,7 @@
                                 </tr>
                                 <tr>
                                     <td> <b> Perusahaan </b> </td>
-                                    <?php if ($kp['nama_per']) { ?>
+                                    <?php if (!empty($kp['nama_per'])) { ?>
                                         <td><?= $kp['nama_per']  ?></td>
                                     <?php } else { ?>
                                         <td>-</td>
@@ -36,7 +36,7 @@
                                 </tr>
                                 <tr>
                                     <td> <b> Dosen Pembimbing </b> </td>
-                                    <?php if ($kp['nama_pemb']) { ?>
+                                    <?php if (!empty($kp['nama_pemb'])) { ?>
                                         <td><?= $kp['nama_pemb']  ?></td>
                                     <?php } else { ?>
                                         <td>-</td>
