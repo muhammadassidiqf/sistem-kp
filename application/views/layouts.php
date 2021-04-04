@@ -113,7 +113,7 @@
                                         <li class="dropdown__item"><a href="<?= site_url('pengajuan') ?>" style="margin-left: -10px;" class="nav__link"><i class="fas fa-briefcase"></i>Pengajuan
                                                 KP</a></li>
                                     <?php } ?>
-                                    <?php if ($num_kp <= 1  and $kp['status2'] == 'Disetujui') { ?>
+                                    <?php if ($num_sidang < 1  and $kp['status2'] == 'Disetujui') { ?>
                                         <li class="dropdown__item"><a href="<?= site_url('pengajuan_sidang') ?>" style="margin-left: -10px;" class="nav__link"><i class="fas fa-clipboard-check"></i>Pengajuan
                                                 Sidang</a></li>
                                     <?php } ?>
@@ -125,16 +125,20 @@
                                 <i class='bx bx-detail  nav__icon'></i>
                                 <span class="nav__name">Bimbingan</span>
                             </a>
+                            <a href="<?= site_url('sidang') ?>" class="nav__link">
+                                <i class="far fa-list-alt nav__icon"></i>
+                                <span class="nav__name">Sidang</span>
+                            </a>
                         <?php } elseif ($user['role'] == 'Mahasiswa') { ?>
                             <a href="<?= site_url('bim_mhs') ?>" class="nav__link">
                                 <i class='bx bx-detail  nav__icon'></i>
                                 <span class="nav__name">Bimbingan</span>
                             </a>
+                            <a href="<?= site_url('sid_mhs') ?>" class="nav__link">
+                                <i class="far fa-list-alt nav__icon"></i>
+                                <span class="nav__name">Sidang</span>
+                            </a>
                         <?php } ?>
-                        <a href="<?= site_url('sidang') ?>" class="nav__link">
-                            <i class="far fa-list-alt nav__icon"></i>
-                            <span class="nav__name">Sidang</span>
-                        </a>
                     </div>
                 </div>
 
@@ -164,6 +168,21 @@
     <script>
         $(document).ready(function() {
             $('#datatable').DataTable({
+                "responsive": true,
+                "order": [
+                    [0, "asc"]
+                ],
+                "language": {
+                    "paginate": {
+                        "previous": `<i class="fas fa-angle-left"></i>`,
+                        "next": `<i class="fas fa-angle-right"></i>`,
+                        "emptyTable": "Tidak ada Data"
+                    }
+                }
+            });
+        });
+        $(document).ready(function() {
+            $('#datatable_sidang').DataTable({
                 "responsive": true,
                 "order": [
                     [0, "asc"]

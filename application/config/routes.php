@@ -65,4 +65,5 @@ $route['bim_mhs'] = 'kp/bimbingan_mhs';
 $route['perusahaan'] = 'perusahaan';
 $route['add_perusahaan'] = 'perusahaan/tambah';
 $route['sidang'] = 'kp/sidang';
+$route['sid_mhs'] = 'kp/sidang_mhs';
 $route['logout'] = 'auth/logout';

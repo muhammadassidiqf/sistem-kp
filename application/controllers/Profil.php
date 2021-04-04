@@ -22,6 +22,7 @@ class Profil extends CI_Controller
                 'user' => $user,
                 'prof' => $this->model_all->get_profil(),
                 'num_kp' => $riwayat,
+                'num_sidang' => $this->model_all->num_sidang(),
                 'kp' => $this->model_all->get_kp(),
             ];
             // var_dump($data);
@@ -86,6 +87,7 @@ class Profil extends CI_Controller
         $data = [
             'user' => $user,
             'num_kp' => $riwayat,
+            'num_sidang' => $this->model_all->num_sidang(),
             'masuk' => $this->model_all->masuk(),
             'kp' => $this->model_all->get_kp(),
         ];

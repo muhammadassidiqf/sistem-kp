@@ -21,6 +21,7 @@ class Dashboard extends CI_Controller
             $data = [
                 'user' => $user,
                 'num_kp' => $riwayat,
+                'num_sidang' => $this->model_all->num_sidang(),
                 'sidang' => $this->model_all->get_sidang(),
                 'kp' => $this->model_all->get_kp(),
             ];
@@ -29,13 +30,22 @@ class Dashboard extends CI_Controller
             $this->template->load('layouts', 'dashboard/dashboard_mhs', $data);
         } elseif ($user['role'] == 'Dosen') {
             $data = [
-                'user' => $user
+                'user' => $user,
+                'num_kp_dsn' => $this->model_all->num_row_kp(),
+                'num_sidang_dsn' => $this->model_all->num_row_sidang(),
+                'kp' => $this->model_all->get_kp_dsn(),
+                'sidang' => $this->model_all->get_sidang_dsn(),
             ];
+            // var_dump($data);
+            // die;
             $this->template->load('layouts', 'dashboard/dashboard_dsn', $data);
         } elseif ($user['role'] == 'Koordinator') {
             $data = [
-                'user' => $user
+                'user' => $user,
+                'num' => $this->model_all->dsn_koor(),
             ];
+            // var_dump($data);
+            // die;
             $this->template->load('layouts', 'dashboard/dashboard_koor', $data);
         }
     }

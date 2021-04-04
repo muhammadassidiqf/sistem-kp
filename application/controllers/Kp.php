@@ -22,7 +22,8 @@ class Kp extends CI_Controller
             'perusahaan' => $this->model_all->get_perusahaan(),
             'mhs' => $this->model_all->get_mahasiswaid(),
             'kp' => $this->model_all->get_kp(),
-            'num_kp' => $riwayat
+            'num_kp' => $riwayat,
+            'num_sidang' => $this->model_all->num_sidang(),
         ];
         // var_dump($data);
         // die;
@@ -39,7 +40,8 @@ class Kp extends CI_Controller
             'user' => $user,
             'mhs' => $this->model_all->get_mahasiswaid(),
             'kp' => $this->model_all->get_kp(),
-            'num_kp' => $riwayat
+            'num_kp' => $riwayat,
+            'num_sidang' => $this->model_all->num_sidang(),
         ];
         $this->template->load('layouts', 'kp/aju_sidang', $data);
         // var_dump($data);
@@ -56,6 +58,7 @@ class Kp extends CI_Controller
             'user' => $user,
             'num_kp' => $riwayat,
             'kp' => $this->model_all->get_kp_dsn(),
+            'num_sidang' => $this->model_all->num_sidang(),
         ];
         // var_dump($data);
         // die;
@@ -73,6 +76,7 @@ class Kp extends CI_Controller
             'num_kp' => $riwayat,
             'kp' => $this->model_all->get_kp(),
             'bimbingan' => $this->model_all->get_bimbmhs(),
+            'num_sidang' => $this->model_all->num_sidang(),
         ];
         // var_dump($data);
         // die;
@@ -90,6 +94,7 @@ class Kp extends CI_Controller
             'num_kp' => $riwayat,
             'kp' => $this->model_all->get_kp(),
             'bimbingan' => $this->model_all->get_bimbid($id),
+            'num_sidang' => $this->model_all->num_sidang(),
         ];
         // var_dump($data);
         // die;
@@ -105,8 +110,28 @@ class Kp extends CI_Controller
         $data = [
             'user' => $user,
             'num_kp' => $riwayat,
-            'kp' => $this->model_all->get_kp(),
+            'sidang' => $this->model_all->get_sidang_dsn(),
+            'num_sidang' => $this->model_all->num_sidang(),
         ];
+        // var_dump($data);
+        // die;
+        $this->template->load('layouts', 'kp/sidang', $data);
+    }
+
+    public function sidang_mhs()
+    {
+        $user = $this->session->userdata('user');
+        $mhs = $this->model_all->get_mahasiswaid();
+        $riwayat = $this->db->where('id_mahasiswa', $mhs['id_mahasiswa'])
+            ->get('kp')->num_rows();
+        $data = [
+            'user' => $user,
+            'num_kp' => $riwayat,
+            'sidang' => $this->model_all->get_sidang(),
+            'num_sidang' => $this->model_all->num_sidang(),
+        ];
+        // var_dump($data);
+        // die;
         $this->template->load('layouts', 'kp/sidang', $data);
     }
 
@@ -184,6 +209,7 @@ class Kp extends CI_Controller
             'num_kp' => $riwayat,
             'kp' => $this->model_all->get_kpid($id),
             'dosen' => $this->model_all->get_dosen(),
+            'num_sidang' => $this->model_all->num_sidang(),
         ];
         if ($user['role'] == 'Dosen' || $user['role'] == 'Koordinator') {
             $data['prof'] = $this->model_all->get_profil_dsn();
@@ -204,6 +230,7 @@ class Kp extends CI_Controller
             'num_kp' => $riwayat,
             'sidang' => $this->model_all->get_sidangid($id),
             'dosen' => $this->model_all->get_dosen(),
+            'num_sidang' => $this->model_all->num_sidang(),
         ];
         if ($user['role'] == 'Dosen' || $user['role'] == 'Koordinator') {
             $data['prof'] = $this->model_all->get_profil_dsn();
@@ -310,6 +337,7 @@ class Kp extends CI_Controller
                 'tgl_bimbingan' => date('Y-m-d', strtotime($_POST['tgl_bimbingan'])),
                 'kegiatan' => $_POST['kegiatan'],
                 'status' => 'Menunggu',
+                'num_sidang' => $this->model_all->num_sidang(),
             ];
             // var_dump($data);
             // die;
@@ -330,5 +358,12 @@ class Kp extends CI_Controller
         $this->db->set('status', 'Tidak Disetujui')->where('id_bimbingan', $id)->update('bimbingan');
         $this->session->set_flashdata('sukses_pemeriksa', "Pengajuan telah disetujui oleh Anda sebagai pemeriksa!");
         redirect('bimbingan');
+    }
+
+    function edit_link($id)
+    {
+        $this->db->set('link', $_POST['link'])->where('id_sidang', $id)->update('sidang');
+        $this->session->set_flashdata('sukses_pemeriksa', "Pengajuan telah disetujui oleh Anda sebagai pemeriksa!");
+        redirect('sidang');
     }
 }
