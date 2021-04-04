@@ -20,24 +20,26 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Tanggal Bimbingan</th>
-                                    <th>Materi/Kegiatan Bimbingan</th>
-                                    <th>Tanda Tangan Pembimbing</th>
+                                    <th>NRP</th>
+                                    <th>Nama</th>
+                                    <th>Perusahaan</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1.</td>
-                                    <td>20 Februari 2021</td>
-                                    <td>Laporan Awal KP</td>
-                                    <td> </td>
-                                </tr>
-                                <tr>
-                                    <td>2.</td>
-                                    <td>02 Maret 2021</td>
-                                    <td>Revisi Laporan KP</td>
-                                    <td> </td>
-                                </tr>
+                                <?php $no = 1 ?>
+                                <?php foreach ($kp as $k) { ?>
+                                    <tr>
+                                        <td><?= $no ?></td>
+                                        <td><?= $k->nrp ?></td>
+                                        <td><?= $k->nama ?></td>
+                                        <td><?= $k->nama_per ?></td>
+                                        <td class="text-center">
+                                            <a href="<?= site_url('kp/edit_bimbingan/' . $k->id_kp) ?>" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></a>
+                                        </td>
+                                    </tr>
+                                    <?php $no++ ?>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>

@@ -15,6 +15,13 @@ class Model_All extends CI_Model
         return $mhs;
     }
 
+    public function get_dosenid()
+    {
+        $user = $this->session->userdata('user');
+        $mhs = $this->db->select('dosen.*')->from('dosen')->where('nik = ' . $user['username'] . '')->get()->row_array();
+        return $mhs;
+    }
+
     public function get_dosen()
     {
         $dsn = $this->db->get('dosen')->result();
@@ -29,6 +36,30 @@ class Model_All extends CI_Model
         $this->db->join('dosen', 'dosen.id_dosen=kp.dosen_pemb', 'left');
         $this->db->where('kp.id_mahasiswa = ' . $mhs['id_mahasiswa'] . '');
         $kp = $this->db->get()->row_array();
+        return $kp;
+    }
+
+    public function get_kp_dsn()
+    {
+        $user = $this->model_all->get_dosenid();
+        $this->db->select('kp.id_kp, kp.dosen_pemb as id_dosen, perusahaan.nama as nama_per, kp.penugasan, (select dosen.nama from kp left join dosen on dosen.id_dosen = kp.dosen_pemb where kp.dosen_pemb = id_dosen) as nama_pemb, kp.status, kp.status2, mahasiswa.nama, mahasiswa.nrp')->from('kp');
+        $this->db->join('mahasiswa', 'mahasiswa.id_mahasiswa=kp.id_mahasiswa', 'left');
+        $this->db->join('perusahaan', 'perusahaan.id_perusahaan=kp.id_perusahaan', 'left');
+        $this->db->join('dosen', 'dosen.id_dosen=kp.dosen_pemb', 'left');
+        $this->db->where('kp.dosen_pemb = ' . $user['id_dosen'] . '');
+        $kp = $this->db->get()->result();
+        return $kp;
+    }
+
+    public function get_bimbid($id)
+    {
+        $this->db->select('kp.id_kp, kp.dosen_pemb as id_dosen, perusahaan.nama as nama_per, kp.penugasan, (select dosen.nama from kp left join dosen on dosen.id_dosen = kp.dosen_pemb where kp.dosen_pemb = id_dosen) as nama_pemb, kp.status, kp.status2, mahasiswa.nama, mahasiswa.nrp, bimbingan.*')->from('kp');
+        $this->db->join('mahasiswa', 'mahasiswa.id_mahasiswa=kp.id_mahasiswa', 'left');
+        $this->db->join('bimbingan', 'bimbingan.id_kp=kp.id_kp', 'left');
+        $this->db->join('perusahaan', 'perusahaan.id_perusahaan=kp.id_perusahaan', 'left');
+        $this->db->join('dosen', 'dosen.id_dosen=kp.dosen_pemb', 'left');
+        $this->db->where('bimbingan.id_kp = ' . $id . '');
+        $kp = $this->db->get()->result();
         return $kp;
     }
 
