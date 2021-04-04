@@ -40,7 +40,7 @@ class Perusahaan extends CI_Controller
                 'no_telp' => $_POST['no_telp'],
             ];
             $this->db->insert('perusahaan', $data);
-            redirect('perusahaan');
+            redirect('dashboard');
             // var_dump($data);
             // die;
         }

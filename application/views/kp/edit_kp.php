@@ -78,7 +78,7 @@
                 </div>
                 <div class="col-4">
                     <a href="<?= site_url('kp/dec_pemeriksa/' . $k->id_kp) ?>" class="btn btn-danger btn-block">
-                        <i class="fa fa-times text-white"></i>&nbsp;Terima</a>
+                        <i class="fa fa-times text-white"></i>&nbsp;Tolak</a>
                 </div>
             <?php } elseif (($k->statuspemeriksa == 'Disetujui') && ($k->status2 == 'Menunggu') && ($k->pemeriksa2 == $prof['id_dosen'])) { ?>
                 <div class="col-4">
@@ -87,7 +87,7 @@
                 </div>
                 <div class="col-4">
                     <a href="<?= site_url('kp/dec_pemeriksa/' . $k->id_kp) ?>" class="btn btn-danger btn-block">
-                        <i class="fa fa-times text-white"></i>&nbsp;Terima</a>
+                        <i class="fa fa-times text-white"></i>&nbsp;Tolak</a>
                 </div>
             <?php } ?>
         </div>

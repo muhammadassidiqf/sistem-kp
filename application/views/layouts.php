@@ -109,25 +109,28 @@
                                     <i class='bx bx-chevron-down dropdown__icon'></i>
                                 </a>
                                 <ul class="dropdown__menu">
-                                    <?php if (($num_kp < 1) or $kp['status'] == 'Tidak Disetujui') { ?>
+                                    <?php if (($num_kp < 1) and $kp['status'] == 'Tidak Disetujui' or ($num_kp < 1)) { ?>
                                         <li class="dropdown__item"><a href="<?= site_url('pengajuan') ?>" style="margin-left: -10px;" class="nav__link"><i class="fas fa-briefcase"></i>Pengajuan
                                                 KP</a></li>
                                     <?php } ?>
-                                    <?php if ($num_kp <= 1) { ?>
+                                    <?php if ($num_kp <= 1  and $kp['status2'] == 'Disetujui') { ?>
                                         <li class="dropdown__item"><a href="<?= site_url('pengajuan_sidang') ?>" style="margin-left: -10px;" class="nav__link"><i class="fas fa-clipboard-check"></i>Pengajuan
                                                 Sidang</a></li>
                                     <?php } ?>
                                 </ul>
                             </li>
                         <?php } ?>
-                        <a href="<?= site_url('bimbingan') ?>" class="nav__link">
-                            <i class='bx bx-detail  nav__icon'></i>
-                            <span class="nav__name">Bimbingan</span>
-                        </a>
-                        <!-- <a href="<?= site_url('perusahaan') ?>" class="nav__link">
-                            <i class='bx bx-buildings nav__icon'></i>
-                            <span class="nav__name">Perusahaan</span>
-                        </a> -->
+                        <?php if (($user['role'] == 'Koordinator') or ($user['role'] == 'Dosen')) { ?>
+                            <a href="<?= site_url('bimbingan') ?>" class="nav__link">
+                                <i class='bx bx-detail  nav__icon'></i>
+                                <span class="nav__name">Bimbingan</span>
+                            </a>
+                        <?php } elseif ($user['role'] == 'Mahasiswa') { ?>
+                            <a href="<?= site_url('bim_mhs') ?>" class="nav__link">
+                                <i class='bx bx-detail  nav__icon'></i>
+                                <span class="nav__name">Bimbingan</span>
+                            </a>
+                        <?php } ?>
                         <a href="<?= site_url('sidang') ?>" class="nav__link">
                             <i class="far fa-list-alt nav__icon"></i>
                             <span class="nav__name">Sidang</span>

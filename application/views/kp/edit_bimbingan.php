@@ -18,7 +18,11 @@
                                     <th>No</th>
                                     <th>Tanggal Bimbingan</th>
                                     <th>Kegiatan Bimbingan</th>
-                                    <th>Approval Pembimbing</th>
+                                    <?php if (($user['role'] == 'Koordinator') or ($user['role'] == 'Dosen')) { ?>
+                                        <th>Approval Pembimbing</th>
+                                    <?php } elseif ($user['role'] == 'Mahasiswa') { ?>
+
+                                    <?php } ?>
                                 </tr>
                             </thead>
                             <tbody>
@@ -29,11 +33,21 @@
                                         <td><?php setlocale(LC_ALL, 'id-ID', 'id_ID');
                                             echo strftime("%d %B %Y", strtotime($k->tgl_bimbingan)) . "\n"; ?></td>
                                         <td><?= $k->kegiatan ?></td>
-                                        <td>
-                                            <?php if ($k->status == 'Menunggu') { ?>
-
-                                            <?php } ?>
-                                        </td>
+                                        <?php if (($user['role'] == 'Koordinator') or ($user['role'] == 'Dosen')) { ?>
+                                            <td class="text-center">
+                                                <?php if ($k->status == 'Menunggu') { ?>
+                                                    <a href="<?= site_url('kp/acc_bimbingan/' . $k->id_bimbingan) ?>" class="btn btn-success">
+                                                        <i class="fa fa-check text-white"></i></a>
+                                                    <a href="<?= site_url('kp/dec_bimbingan/' . $k->id_bimbingan) ?>" class="btn btn-danger">
+                                                        <i class="fa fa-times text-white"></i></a>
+                                                <?php } elseif ($k->status == 'Disetujui') { ?>
+                                                    <span class="badge badge-success"><?= $k->status ?></span>
+                                                <?php } elseif ($k->status == 'Tidak Disetujui') { ?>
+                                                    <span class="badge badge-danger"><?= $k->status ?></span>
+                                                <?php } ?>
+                                            </td>
+                                        <?php } elseif ($user['role'] == 'Mahasiswa') { ?>
+                                        <?php } ?>
                                     </tr>
                                     <?php $no++ ?>
                                 <?php } ?>

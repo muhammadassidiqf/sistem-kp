@@ -46,12 +46,6 @@
                 </td>
             </tr>
             <tr>
-                <th>Dosen Pembimbing</th>
-                <td>
-                    <?= $k->nama_pemb ?>
-                </td>
-            </tr>
-            <tr>
                 <th>Dosen Penguji</th>
                 <td>
                     <?= $k->nama_peng ?>

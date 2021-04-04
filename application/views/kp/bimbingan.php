@@ -44,12 +44,6 @@
                         </table>
                     </div>
 
-                    <div class="form-row">
-                        <div class="col-md-12">
-                            <a href="" class="btn btn-secondary btn-md">Tambah Bimbingan</a>
-                        </div>
-                    </div>
-
                 </div>
 
             </div>

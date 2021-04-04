@@ -21,6 +21,7 @@ class Kp extends CI_Controller
             'user' => $user,
             'perusahaan' => $this->model_all->get_perusahaan(),
             'mhs' => $this->model_all->get_mahasiswaid(),
+            'kp' => $this->model_all->get_kp(),
             'num_kp' => $riwayat
         ];
         // var_dump($data);
@@ -61,6 +62,23 @@ class Kp extends CI_Controller
         $this->template->load('layouts', 'kp/bimbingan', $data);
     }
 
+    public function bimbingan_mhs()
+    {
+        $user = $this->session->userdata('user');
+        $mhs = $this->model_all->get_mahasiswaid();
+        $riwayat = $this->db->where('id_mahasiswa', $mhs['id_mahasiswa'])
+            ->get('kp')->num_rows();
+        $data = [
+            'user' => $user,
+            'num_kp' => $riwayat,
+            'kp' => $this->model_all->get_kp(),
+            'bimbingan' => $this->model_all->get_bimbmhs(),
+        ];
+        // var_dump($data);
+        // die;
+        $this->template->load('layouts', 'kp/edit_bimbingan', $data);
+    }
+
     public function edit_bimbingan($id)
     {
         $user = $this->session->userdata('user');
@@ -70,6 +88,7 @@ class Kp extends CI_Controller
         $data = [
             'user' => $user,
             'num_kp' => $riwayat,
+            'kp' => $this->model_all->get_kp(),
             'bimbingan' => $this->model_all->get_bimbid($id),
         ];
         // var_dump($data);
@@ -297,5 +316,19 @@ class Kp extends CI_Controller
             $this->db->insert('bimbingan', $data);
             redirect(base_url() . "kp/edit_bimbingan/" . $_POST['id_kp']);
         }
+    }
+
+    function acc_bimbingan($id)
+    {
+        $this->db->set('status', 'Disetujui')->where('id_bimbingan', $id)->update('bimbingan');
+        $this->session->set_flashdata('sukses_pemeriksa', "Pengajuan telah disetujui oleh Anda sebagai pemeriksa!");
+        redirect('bimbingan');
+    }
+
+    function dec_bimbingan($id)
+    {
+        $this->db->set('status', 'Tidak Disetujui')->where('id_bimbingan', $id)->update('bimbingan');
+        $this->session->set_flashdata('sukses_pemeriksa', "Pengajuan telah disetujui oleh Anda sebagai pemeriksa!");
+        redirect('bimbingan');
     }
 }
