@@ -11,7 +11,7 @@ class Model_All extends CI_Model
     public function get_mahasiswaid()
     {
         $user = $this->session->userdata('user');
-        $mhs = $this->db->select('mahasiswa.*, dosen.id_dosen, dosen.nama as dosenwali')->from('mahasiswa')->join('dosen', 'dosen.id_dosen = mahasiswa.dosen_wali', 'left')->where('nrp = ' . $user['username'] . '')->get()->row_array();
+        $mhs = $this->db->select('mahasiswa.*, dosen.nama as dosenwali')->from('mahasiswa')->join('dosen', 'dosen.id_dosen = mahasiswa.dosen_wali', 'left')->where('nrp = ' . $user['username'] . '')->get()->row_array();
         return $mhs;
     }
 
@@ -24,7 +24,7 @@ class Model_All extends CI_Model
     public function get_kp()
     {
         $mhs = $this->model_all->get_mahasiswaid();
-        $this->db->select('kp.id_kp, kp.dosen_pemb as id_dosen, perusahaan.nama as nama_per, kp.penugasan, (select dosen.nama from kp left join dosen on dosen.id_dosen = kp.dosen_pemb where kp.dosen_pemb = id_dosen) as nama_pemb')->from('kp');
+        $this->db->select('kp.id_kp, kp.dosen_pemb as id_dosen, perusahaan.nama as nama_per, kp.penugasan, (select dosen.nama from kp left join dosen on dosen.id_dosen = kp.dosen_pemb where kp.dosen_pemb = id_dosen) as nama_pemb, kp.status, kp.status2')->from('kp');
         $this->db->join('perusahaan', 'perusahaan.id_perusahaan=kp.id_perusahaan', 'left');
         $this->db->join('dosen', 'dosen.id_dosen=kp.dosen_pemb', 'left');
         $this->db->where('kp.id_mahasiswa = ' . $mhs['id_mahasiswa'] . '');

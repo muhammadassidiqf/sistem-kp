@@ -33,6 +33,19 @@
                             <input type="text" name="no_telp" placeholder="No. WhatsApp" class="form-control my-0 p-4" value="<?= $mhs['no_telp'] ?>" readonly required>
                         </div>
                     </div>
+                    <label for="nama" class="col-sm-4 col-form-label">Nama Dosen Wali</label>
+                    <div class="form-row">
+                        <div class="col-lg-7">
+                            <select name="dosen" placeholder="Nama Dosen" class="form-control" readonly>
+                                <option value="<?= $mhs['dosen_wali'] ?>" selected><?= $mhs['dosenwali'] ?></option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- <script>
+                        $(document).ready(function() {
+                            $('#dsn').select2();
+                        });
+                    </script> -->
                     <label for="nama_per" class="col-sm-4 col-form-label">Nama Perusahaan</label>
                     <div class="form-row">
                         <div class="col-lg-7">
@@ -56,19 +69,6 @@
                             <textarea type="text" name="penugasan" placeholder="Penugasan KP" class="form-control my-0 p-4" required></textarea>
                         </div>
                     </div>
-                    <label for="nama" class="col-sm-4 col-form-label">Nama Dosen Wali</label>
-                    <div class="form-row">
-                        <div class="col-lg-7">
-                            <select type="text" name="dosen" id="dsn" placeholder="Nama Dosen" class="custom-select custom-select-lg my-0 p-4" readonly>
-                                <option value="<?= $mhs['id_dosen'] ?>" selected disabled><?= $mhs['dosenwali'] ?></option>
-                            </select>
-                        </div>
-                    </div>
-                    <script>
-                        $(document).ready(function() {
-                            $('#dsn').select2();
-                        });
-                    </script>
                     <div class="form-row">
                         <div class="col-lg-7">
                             <button type="submit" class="btn1 mt-3 mb-5">Submit</button>

@@ -53,7 +53,8 @@ class Kp extends CI_Controller
             ->get('kp')->num_rows();
         $data = [
             'user' => $user,
-            'num_kp' => $riwayat
+            'num_kp' => $riwayat,
+            'kp' => $this->model_all->get_kp(),
         ];
         $this->template->load('layouts', 'kp/bimbingan', $data);
     }
@@ -67,6 +68,7 @@ class Kp extends CI_Controller
         $data = [
             'user' => $user,
             'num_kp' => $riwayat,
+            'kp' => $this->model_all->get_kp(),
         ];
         $this->template->load('layouts', 'kp/sidang', $data);
     }
@@ -75,7 +77,7 @@ class Kp extends CI_Controller
     {
         $this->form_validation->set_rules('nrp', 'nrp', 'required');
         $this->form_validation->set_rules('nama', 'nama', 'required');
-        $this->form_validation->set_rules('no_telp', 'no_telp', 'required');
+        // $this->form_validation->set_rules('no_telp', 'no_telp', 'required');
         $this->form_validation->set_rules('perusahaan', 'perusahaan', 'required');
         $this->form_validation->set_rules('penugasan', 'penugasan', 'required');
         if ($this->form_validation->run() == FALSE) {
@@ -86,6 +88,7 @@ class Kp extends CI_Controller
                 'id_mahasiswa' => $mhs['id_mahasiswa'],
                 'id_perusahaan' => $_POST['perusahaan'],
                 'penugasan' => $_POST['penugasan'],
+                // 'dosen' => $_POST['dosen'],
                 'tanggal' => date('Y-m-d'),
                 'status' => 'Menunggu',
                 'status2' => 'Menunggu'

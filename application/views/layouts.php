@@ -109,7 +109,7 @@
                                     <i class='bx bx-chevron-down dropdown__icon'></i>
                                 </a>
                                 <ul class="dropdown__menu">
-                                    <?php if ($num_kp < 1) { ?>
+                                    <?php if (($num_kp < 1) or $kp['status'] == 'Tidak Disetujui') { ?>
                                         <li class="dropdown__item"><a href="<?= site_url('pengajuan') ?>" style="margin-left: -10px;" class="nav__link"><i class="fas fa-briefcase"></i>Pengajuan
                                                 KP</a></li>
                                     <?php } ?>
@@ -124,10 +124,10 @@
                             <i class='bx bx-detail  nav__icon'></i>
                             <span class="nav__name">Bimbingan</span>
                         </a>
-                        <a href="<?= site_url('perusahaan') ?>" class="nav__link">
+                        <!-- <a href="<?= site_url('perusahaan') ?>" class="nav__link">
                             <i class='bx bx-buildings nav__icon'></i>
                             <span class="nav__name">Perusahaan</span>
-                        </a>
+                        </a> -->
                         <a href="<?= site_url('sidang') ?>" class="nav__link">
                             <i class="far fa-list-alt nav__icon"></i>
                             <span class="nav__name">Sidang</span>
@@ -159,6 +159,21 @@
         </div>
     </div>
     <script>
+        $(document).ready(function() {
+            $('#datatable').DataTable({
+                "responsive": true,
+                "order": [
+                    [0, "asc"]
+                ],
+                "language": {
+                    "paginate": {
+                        "previous": `<i class="fas fa-angle-left"></i>`,
+                        "next": `<i class="fas fa-angle-right"></i>`,
+                        "emptyTable": "Tidak ada Data"
+                    }
+                }
+            });
+        });
         jQuery(document).ready(function($) {
             $('#modal_kp').on('show.bs.modal', function(e) {
                 var button = $(e.relatedTarget);

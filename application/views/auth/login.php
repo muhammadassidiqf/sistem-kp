@@ -45,8 +45,6 @@
                             </div>
                         </div>
 
-                        <a href="#">Forgot PIN Code?</a>
-
                     </form>
                 </div>
 

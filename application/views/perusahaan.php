@@ -15,25 +15,25 @@
                      <h6>Data Perusahaan</h6>
                      <div class="form-row">
                          <div class="col-lg-7">
-                             <input type="text" name="nama" placeholder="Nama Perusahaan" class="form-control my-3 p-4">
+                             <input type="text" name="nama" placeholder="Nama Perusahaan" class="form-control my-3 p-4" required>
                          </div>
                      </div>
 
                      <div class="form-row">
                          <div class="col-lg-7">
-                             <input type="text" name="alamat" placeholder="Alamat" class="form-control my-3 p-4">
+                             <input type="text" name="alamat" placeholder="Alamat" class="form-control my-3 p-4" required>
                          </div>
                      </div>
 
                      <div class="form-row">
                          <div class="col-lg-7">
-                             <input type="text" name="email" placeholder="Email" class="form-control my-3 p-4">
+                             <input type="text" name="email" placeholder="Email" class="form-control my-3 p-4" required>
                          </div>
                      </div>
 
                      <div class="form-row">
                          <div class="col-lg-7">
-                             <input type="text" name="no_telp" placeholder="No Telp" class="form-control my-3 p-4">
+                             <input type="text" name="no_telp" placeholder="No Telp" class="form-control my-3 p-4" required>
                          </div>
                      </div>
                      <div class="form-row">

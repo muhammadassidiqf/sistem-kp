@@ -14,10 +14,10 @@ class Dashboard extends CI_Controller
     public function index()
     {
         $user = $this->session->userdata('user');
+        $mhs = $this->model_all->get_mahasiswaid();
+        $riwayat = $this->db->where('id_mahasiswa', $mhs['id_mahasiswa'])
+            ->get('kp')->num_rows();
         if ($user['role'] == 'Mahasiswa') {
-            $mhs = $this->model_all->get_mahasiswaid();
-            $riwayat = $this->db->where('id_mahasiswa', $mhs['id_mahasiswa'])
-                ->get('kp')->num_rows();
             $data = [
                 'user' => $user,
                 'num_kp' => $riwayat,

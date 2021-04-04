@@ -16,7 +16,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-bordered" id="datatable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -43,8 +43,8 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="col-md-3">
-                            <button type="button" class="btn2">Tambah</button>
+                        <div class="col-md-12">
+                            <a href="" class="btn btn-secondary btn-md">Tambah Bimbingan</a>
                         </div>
                     </div>
 
