@@ -72,9 +72,13 @@
             <span style="text-align: center;">
                 <h4>Sistem Kerja Praktik ITENAS</h4>
             </span>
-            <div class="header__img">
+            <!-- <div class="header__img">
                 <img src="assets/img/programmer.svg" alt="">
-            </div>
+            </div> -->
+            <span>
+                <i class="fa fa-user-circle fa-2x"></i>&nbsp;<span><?= $this->session->userdata('name')['nama'] ?></span>
+            </span>
+            <!-- <p>Muhammad</p> -->
         </header>
 
         <!-- sidebar -->

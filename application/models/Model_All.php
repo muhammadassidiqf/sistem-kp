@@ -119,7 +119,7 @@ class Model_All extends CI_Model
         $this->db->join('perusahaan', 'perusahaan.id_perusahaan=kp.id_perusahaan', 'left');
         $this->db->join('dosen', 'dosen.id_dosen=sidang.dosen_png', 'left');
         $this->db->where('sidang.id_mahasiswa = ' . $mhs['id_mahasiswa'] . '');
-        $kp = $this->db->get()->result();
+        $kp = $this->db->get()->row_array();
         return $kp;
     }
 
