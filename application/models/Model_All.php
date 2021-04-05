@@ -51,7 +51,7 @@ class Model_All extends CI_Model
     public function num_row_kp()
     {
         $user = $this->model_all->get_dosenid();
-        $this->db->select('kp.id_kp, kp.dosen_pemb as id_dosen, perusahaan.nama as nama_per, kp.penugasan, (select dosen.nama from kp left join dosen on dosen.id_dosen = kp.dosen_pemb where kp.dosen_pemb = id_dosen) as nama_pemb, kp.status, kp.status2, mahasiswa.nama, mahasiswa.nrp')->from('kp');
+        $this->db->select('kp.id_kp, kp.dosen_pemb as id_dosen, perusahaan.nama as nama_per, kp.penugasan, (select dosen.nama from kp where kp.dosen_pemb = id_dosen) as nama_pemb, kp.status, kp.status2, mahasiswa.nama, mahasiswa.nrp')->from('kp');
         $this->db->join('mahasiswa', 'mahasiswa.id_mahasiswa=kp.id_mahasiswa', 'left');
         $this->db->join('perusahaan', 'perusahaan.id_perusahaan=kp.id_perusahaan', 'left');
         $this->db->join('dosen', 'dosen.id_dosen=kp.dosen_pemb', 'left');
@@ -63,7 +63,7 @@ class Model_All extends CI_Model
     public function num_row_sidang()
     {
         $user = $this->model_all->get_dosenid();
-        $this->db->select('mahasiswa.*, kp.dosen_pemb as id_dosen, perusahaan.nama as nama_per, kp.penugasan, (select dosen.nama from kp left join dosen on dosen.id_dosen=kp.dosen_pemb where kp.dosen_pemb = id_dosen) as nama_pemb, sidang.id_sidang, sidang.judul, sidang.tanggal, sidang.tgl_pengajuan, sidang.link, (select dosen.nama from sidang where sidang.dosen_png = dosen.id_dosen) as nama_peng')->from('sidang');
+        $this->db->select('mahasiswa.*, kp.dosen_pemb as id_dosen, perusahaan.nama as nama_per, kp.penugasan, (select dosen.nama from kp where kp.dosen_pemb = id_dosen) as nama_pemb, sidang.id_sidang, sidang.judul, sidang.tanggal, sidang.tgl_pengajuan, sidang.link, (select dosen.nama from sidang where sidang.dosen_png = dosen.id_dosen) as nama_peng')->from('sidang');
         $this->db->join('kp', 'kp.id_kp=sidang.id_kp', 'left');
         $this->db->join('mahasiswa', 'mahasiswa.id_mahasiswa=sidang.id_mahasiswa', 'left');
         $this->db->join('perusahaan', 'perusahaan.id_perusahaan=kp.id_perusahaan', 'left');
@@ -76,7 +76,7 @@ class Model_All extends CI_Model
     public function get_kp_dsn()
     {
         $user = $this->model_all->get_dosenid();
-        $this->db->select('kp.id_kp, kp.dosen_pemb as id_dosen, perusahaan.nama as nama_per, kp.penugasan, (select dosen.nama from kp left join dosen on dosen.id_dosen = kp.dosen_pemb where kp.dosen_pemb = id_dosen) as nama_pemb, kp.status, kp.status2, mahasiswa.nama, mahasiswa.nrp')->from('kp');
+        $this->db->select('kp.id_kp, kp.dosen_pemb as id_dosen, perusahaan.nama as nama_per, kp.penugasan, (select dosen.nama from kp where kp.dosen_pemb = id_dosen) as nama_pemb, kp.status, kp.status2, mahasiswa.nama, mahasiswa.nrp')->from('kp');
         $this->db->join('mahasiswa', 'mahasiswa.id_mahasiswa=kp.id_mahasiswa', 'left');
         $this->db->join('perusahaan', 'perusahaan.id_perusahaan=kp.id_perusahaan', 'left');
         $this->db->join('dosen', 'dosen.id_dosen=kp.dosen_pemb', 'left');
@@ -87,12 +87,12 @@ class Model_All extends CI_Model
 
     public function get_bimbid($id)
     {
-        $this->db->select('kp.id_kp, kp.dosen_pemb as id_dosen, perusahaan.nama as nama_per, kp.penugasan, (select dosen.nama from kp left join dosen on dosen.id_dosen = kp.dosen_pemb where kp.dosen_pemb = id_dosen) as nama_pemb, kp.status, kp.status2, mahasiswa.nama, mahasiswa.nrp, bimbingan.*')->from('kp');
+        $this->db->select('kp.id_kp, kp.dosen_pemb as id_dosen, perusahaan.nama as nama_per, kp.penugasan, (select dosen.nama from kp where kp.dosen_pemb = id_dosen) as nama_pemb, kp.status, kp.status2, mahasiswa.nama, mahasiswa.nrp, bimbingan.*')->from('kp');
         $this->db->join('mahasiswa', 'mahasiswa.id_mahasiswa=kp.id_mahasiswa', 'left');
         $this->db->join('bimbingan', 'bimbingan.id_kp=kp.id_kp', 'left');
         $this->db->join('perusahaan', 'perusahaan.id_perusahaan=kp.id_perusahaan', 'left');
         $this->db->join('dosen', 'dosen.id_dosen=kp.dosen_pemb', 'left');
-        $this->db->where('bimbingan.id_kp = ' . $id . '');
+        $this->db->where('kp.id_kp = ' . $id . '');
         $kp = $this->db->get()->result();
         return $kp;
     }
@@ -100,7 +100,7 @@ class Model_All extends CI_Model
     public function get_bimbmhs()
     {
         $mhs = $this->model_all->get_mahasiswaid();
-        $this->db->select('kp.id_kp, kp.dosen_pemb as id_dosen, perusahaan.nama as nama_per, kp.penugasan, (select dosen.nama from kp left join dosen on dosen.id_dosen = kp.dosen_pemb where kp.dosen_pemb = id_dosen) as nama_pemb, kp.status, kp.status2, mahasiswa.nama, mahasiswa.nrp, bimbingan.*')->from('kp');
+        $this->db->select('kp.id_kp, kp.dosen_pemb as id_dosen, perusahaan.nama as nama_per, kp.penugasan, (select dosen.nama from kp where kp.dosen_pemb = id_dosen) as nama_pemb, kp.status, kp.status2, mahasiswa.nama, mahasiswa.nrp, bimbingan.*')->from('kp');
         $this->db->join('mahasiswa', 'mahasiswa.id_mahasiswa=kp.id_mahasiswa', 'left');
         $this->db->join('bimbingan', 'bimbingan.id_kp=kp.id_kp', 'left');
         $this->db->join('perusahaan', 'perusahaan.id_perusahaan=kp.id_perusahaan', 'left');
@@ -122,11 +122,23 @@ class Model_All extends CI_Model
         $kp = $this->db->get()->row_array();
         return $kp;
     }
+    public function get_sidang_mhs()
+    {
+        $mhs = $this->model_all->get_mahasiswaid();
+        $this->db->select('mahasiswa.*, kp.dosen_pemb as id_dosen, perusahaan.nama as nama_per, kp.penugasan, (select dosen.nama from kp left join dosen on dosen.id_dosen=kp.dosen_pemb where kp.dosen_pemb = id_dosen) as nama_pemb, sidang.id_sidang, sidang.judul, sidang.tanggal, sidang.tgl_pengajuan, sidang.link, (select dosen.nama from sidang where sidang.dosen_png = dosen.id_dosen) as nama_peng')->from('sidang');
+        $this->db->join('kp', 'kp.id_kp=sidang.id_kp', 'left');
+        $this->db->join('mahasiswa', 'mahasiswa.id_mahasiswa=sidang.id_mahasiswa', 'left');
+        $this->db->join('perusahaan', 'perusahaan.id_perusahaan=kp.id_perusahaan', 'left');
+        $this->db->join('dosen', 'dosen.id_dosen=sidang.dosen_png', 'left');
+        $this->db->where('sidang.id_mahasiswa = ' . $mhs['id_mahasiswa'] . '');
+        $kp = $this->db->get()->result();
+        return $kp;
+    }
 
     public function get_sidang_dsn()
     {
         $user = $this->model_all->get_dosenid();
-        $this->db->select('mahasiswa.*, kp.dosen_pemb as id_dosen, perusahaan.nama as nama_per, kp.penugasan, (select dosen.nama from kp left join dosen on dosen.id_dosen=kp.dosen_pemb where kp.dosen_pemb = id_dosen) as nama_pemb, sidang.id_sidang, sidang.judul, sidang.tanggal, sidang.tgl_pengajuan, sidang.link, (select dosen.nama from sidang where sidang.dosen_png = dosen.id_dosen) as nama_peng')->from('sidang');
+        $this->db->select('mahasiswa.*, kp.dosen_pemb as id_dosen, perusahaan.nama as nama_per, kp.penugasan, (select dosen.nama from kp  where kp.dosen_pemb = id_dosen) as nama_pemb, sidang.id_sidang, sidang.judul, sidang.tanggal, sidang.tgl_pengajuan, sidang.link, (select dosen.nama from sidang where sidang.dosen_png = dosen.id_dosen) as nama_peng')->from('sidang');
         $this->db->join('kp', 'kp.id_kp=sidang.id_kp', 'left');
         $this->db->join('mahasiswa', 'mahasiswa.id_mahasiswa=sidang.id_mahasiswa', 'left');
         $this->db->join('perusahaan', 'perusahaan.id_perusahaan=kp.id_perusahaan', 'left');
@@ -288,7 +300,7 @@ class Model_All extends CI_Model
             $this->db->join('pemeriksa', 'pemeriksa.id_kp=pemeriksa2.id_kp', 'left');
             $this->db->join('pengirim', 'pengirim.id_kp=pemeriksa2.id_kp', 'left');
             $this->db->join('perusahaan', 'perusahaan.id_perusahaan= kp.id_perusahaan', 'left');
-            $this->db->join('dosen', 'dosen.id_dosen=(select dosen.id_dosen from kp where kp.dosen_pemb = dosen.id_dosen)', 'left');
+            $this->db->join('dosen', 'dosen.id_dosen=kp.dosen_pemb', 'left');
             $this->db->where('pemeriksa.id_dsn=' . $data['id_dosen'] . ' AND pemeriksa.statuspemeriksa="Menunggu" AND kp.status="Menunggu" AND kp.status2="Menunggu" OR pemeriksa.id_dsn=' . $data['id_dosen'] . ' AND pemeriksa.statuspemeriksa="Disetujui" AND kp.status="Disetujui" AND kp.status2="Menunggu" OR pemeriksa.id_dsn=' . $data['id_dosen'] . ' AND pemeriksa.statuspemeriksa="Disetujui" AND kp.status="Disetujui" AND kp.status2="Disetujui" OR pemeriksa.id_dsn=' . $data['id_dosen'] . ' AND pemeriksa.statuspemeriksa="Tidak Disetujui" AND kp.status="Tidak Disetujui" AND kp.status2="Tidak Disetujui" OR pemeriksa2.id_dsn=' . $data['id_dosen'] . ' AND pemeriksa2.statuspemeriksa2="Menunggu" AND kp.status="Disetujui" AND kp.status2="Menunggu" OR pemeriksa2.id_dsn=' . $data['id_dosen'] . ' AND pemeriksa2.statuspemeriksa2="Disetujui" AND kp.status="Disetujui" AND kp.status2="Menunggu" OR pemeriksa2.id_dsn=' . $data['id_dosen'] . ' AND pemeriksa2.statuspemeriksa2="Disetujui" AND kp.status="Disetujui" AND kp.status2="Disetujui" OR pemeriksa2.id_dsn=' . $data['id_dosen'] . ' AND pemeriksa2.statuspemeriksa2="Tidak Disetujui" AND kp.status="Tidak Disetujui" AND kp.status2="Tidak Disetujui"');
             $kp =  $this->db->get()->result();
 
@@ -299,7 +311,7 @@ class Model_All extends CI_Model
             $this->db->join('pemeriksa', 'pemeriksa.id_sidang=pemeriksa2.id_sidang', 'left');
             $this->db->join('pengirim', 'pengirim.id_sidang=pemeriksa2.id_sidang', 'left');
             $this->db->join('perusahaan', 'perusahaan.id_perusahaan= kp.id_perusahaan', 'left');
-            $this->db->join('dosen', 'dosen.id_dosen=(select dosen.id_dosen from kp where kp.dosen_pemb = dosen.id_dosen)', 'left');
+            $this->db->join('dosen', 'dosen.id_dosen=sidang.dosen_png', 'left');
             $this->db->where('pemeriksa.id_dsn=' . $data['id_dosen'] . ' AND pemeriksa.statuspemeriksa="Menunggu" AND sidang.status="Menunggu" AND sidang.status2="Menunggu" OR pemeriksa.id_dsn=' . $data['id_dosen'] . ' AND pemeriksa.statuspemeriksa="Disetujui" AND sidang.status="Disetujui" AND sidang.status2="Menunggu" OR pemeriksa.id_dsn=' . $data['id_dosen'] . ' AND pemeriksa.statuspemeriksa="Disetujui" AND sidang.status="Disetujui" AND sidang.status2="Disetujui" OR pemeriksa.id_dsn=' . $data['id_dosen'] . ' AND pemeriksa.statuspemeriksa="Tidak Disetujui" AND sidang.status="Tidak Disetujui" AND sidang.status2="Tidak Disetujui" OR pemeriksa2.id_dsn=' . $data['id_dosen'] . ' AND pemeriksa2.statuspemeriksa2="Menunggu" AND sidang.status="Disetujui" AND sidang.status2="Menunggu" OR pemeriksa2.id_dsn=' . $data['id_dosen'] . ' AND pemeriksa2.statuspemeriksa2="Disetujui" AND sidang.status="Disetujui" AND sidang.status2="Menunggu" OR pemeriksa2.id_dsn=' . $data['id_dosen'] . ' AND pemeriksa2.statuspemeriksa2="Disetujui" AND sidang.status="Disetujui" AND sidang.status2="Disetujui" OR pemeriksa2.id_dsn=' . $data['id_dosen'] . ' AND pemeriksa2.statuspemeriksa2="Tidak Disetujui" AND sidang.status="Tidak Disetujui" AND sidang.status2="Tidak Disetujui"');
             $sidang =  $this->db->get()->result();
         } elseif ($user['role'] == 'Mahasiswa') {
@@ -309,7 +321,7 @@ class Model_All extends CI_Model
             $this->db->join('pemeriksa', 'pemeriksa.id_kp=pemeriksa2.id_kp', 'left');
             $this->db->join('pengirim', 'pengirim.id_kp=pemeriksa2.id_kp', 'left');
             $this->db->join('perusahaan', 'perusahaan.id_perusahaan= kp.id_perusahaan', 'left');
-            $this->db->join('dosen', 'dosen.id_dosen=(select dosen.id_dosen from kp where kp.dosen_pemb = dosen.id_dosen)', 'left');
+            $this->db->join('dosen', 'dosen.id_dosen=kp.dosen_pemb ', 'left');
             $this->db->where('pengirim.id_mhs=' . $data['id_mahasiswa'] . ' AND pengirim.statuspengirim="Menunggu" AND kp.status="Menunggu" AND kp.status2="Menunggu" OR pengirim.id_mhs=' . $data['id_mahasiswa'] . ' AND pengirim.statuspengirim="Menunggu" AND kp.status="Disetujui" AND kp.status2="Menunggu" OR pengirim.id_mhs=' . $data['id_mahasiswa'] . ' AND pengirim.statuspengirim="Disetujui" AND kp.status="Disetujui" AND kp.status2="Disetujui" OR pengirim.id_mhs=' . $data['id_mahasiswa'] . ' AND pengirim.statuspengirim="Tidak Disetujui" AND kp.status="Tidak Disetujui" AND kp.status2="Tidak Disetujui"');
             $kp =  $this->db->get()->result();
 
@@ -319,11 +331,11 @@ class Model_All extends CI_Model
             $this->db->join('pemeriksa', 'pemeriksa.id_sidang=pemeriksa2.id_sidang', 'left');
             $this->db->join('pengirim', 'pengirim.id_sidang=pemeriksa2.id_sidang', 'left');
             $this->db->join('perusahaan', 'perusahaan.id_perusahaan= kp.id_perusahaan', 'left');
-            $this->db->join('dosen', 'dosen.id_dosen=(select dosen.id_dosen from kp where kp.dosen_pemb = dosen.id_dosen)', 'left');
+            $this->db->join('dosen', 'dosen.id_dosen=sidang.dosen_png', 'left');
             $this->db->where('pengirim.id_mhs=' . $data['id_mahasiswa'] . ' AND pengirim.statuspengirim="Menunggu" AND sidang.status="Menunggu" AND kp.status2="Menunggu" OR pengirim.id_mhs=' . $data['id_mahasiswa'] . ' AND pengirim.statuspengirim="Menunggu" AND sidang.status="Disetujui" AND sidang.status2="Menunggu" OR pengirim.id_mhs=' . $data['id_mahasiswa'] . ' AND pengirim.statuspengirim="Disetujui" AND sidang.status="Disetujui" AND sidang.status2="Disetujui" OR pengirim.id_mhs=' . $data['id_mahasiswa'] . ' AND pengirim.statuspengirim="Tidak Disetujui" AND sidang.status="Tidak Disetujui" AND sidang.status2="Tidak Disetujui"');
             $sidang =  $this->db->get()->result();
         }
-        // return print_r($this->db->last_query());
+        // return print_r($this->db->last_query($kp));
         return array_merge($kp, $sidang);
     }
 

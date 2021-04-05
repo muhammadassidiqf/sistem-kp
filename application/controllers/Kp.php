@@ -80,7 +80,7 @@ class Kp extends CI_Controller
         ];
         // var_dump($data);
         // die;
-        $this->template->load('layouts', 'kp/edit_bimbingan', $data);
+        $this->template->load('layouts', 'kp/edit_bimbingan_mhs', $data);
     }
 
     public function edit_bimbingan($id)
@@ -110,6 +110,7 @@ class Kp extends CI_Controller
         $data = [
             'user' => $user,
             'num_kp' => $riwayat,
+            'kp' => $this->model_all->get_kp(),
             'sidang' => $this->model_all->get_sidang_dsn(),
             'num_sidang' => $this->model_all->num_sidang(),
         ];
@@ -127,7 +128,8 @@ class Kp extends CI_Controller
         $data = [
             'user' => $user,
             'num_kp' => $riwayat,
-            'sidang' => $this->model_all->get_sidang(),
+            'kp' => $this->model_all->get_kp(),
+            'sidang' => $this->model_all->get_sidang_mhs(),
             'num_sidang' => $this->model_all->num_sidang(),
         ];
         // var_dump($data);
@@ -328,7 +330,7 @@ class Kp extends CI_Controller
     {
         $this->form_validation->set_rules('id_kp', 'id_kp', 'required');
         $this->form_validation->set_rules('kegiatan', 'kegiatan', 'required');
-        $this->form_validation->set_rules('tgl_bimbingan', 'tgl_bimbingan', 'required');
+        // $this->form_validation->set_rules('tgl_bimbingan', 'tgl_bimbingan', 'required');
         if ($this->form_validation->run() == FALSE) {
             redirect('bimbingan');
         } else {
@@ -337,12 +339,11 @@ class Kp extends CI_Controller
                 'tgl_bimbingan' => date('Y-m-d', strtotime($_POST['tgl_bimbingan'])),
                 'kegiatan' => $_POST['kegiatan'],
                 'status' => 'Menunggu',
-                'num_sidang' => $this->model_all->num_sidang(),
             ];
             // var_dump($data);
             // die;
             $this->db->insert('bimbingan', $data);
-            redirect(base_url() . "kp/edit_bimbingan/" . $_POST['id_kp']);
+            redirect('dashboard');
         }
     }
 
