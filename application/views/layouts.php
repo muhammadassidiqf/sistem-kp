@@ -113,7 +113,7 @@
                                     <i class='bx bx-chevron-down dropdown__icon'></i>
                                 </a>
                                 <ul class="dropdown__menu">
-                                    <?php if (($num_kp < 1) and $kp['status'] == 'Tidak Disetujui' or ($num_kp < 1)) { ?>
+                                    <?php if (($num_kp >= 1) and $kp['status'] == 'Tidak Disetujui' or ($num_kp < 1)) { ?>
                                         <li class="dropdown__item"><a href="<?= site_url('pengajuan') ?>" style="margin-left: -10px;" class="nav__link"><i class="fas fa-briefcase"></i>Pengajuan
                                                 KP</a></li>
                                     <?php } ?>

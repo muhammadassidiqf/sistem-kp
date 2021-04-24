@@ -43,6 +43,7 @@ class Model_All extends CI_Model
         $this->db->join('perusahaan', 'perusahaan.id_perusahaan=kp.id_perusahaan', 'left');
         $this->db->join('dosen', 'dosen.id_dosen=kp.dosen_pemb', 'left');
         $this->db->where('kp.id_mahasiswa = ' . $mhs['id_mahasiswa'] . '');
+        $this->db->order_by('kp.id_kp', 'desc');
         $kp = $this->db->get()->row_array();
         return $kp;
         // return print_r($this->db->last_query($kp));
@@ -113,7 +114,7 @@ class Model_All extends CI_Model
     public function get_sidang()
     {
         $mhs = $this->model_all->get_mahasiswaid();
-        $this->db->select('mahasiswa.*, kp.dosen_pemb as id_dosen, perusahaan.nama as nama_per, kp.penugasan, (select dosen.nama from kp left join dosen on dosen.id_dosen=kp.dosen_pemb where kp.dosen_pemb = id_dosen) as nama_pemb, sidang.id_sidang, sidang.judul, sidang.tanggal, sidang.tgl_pengajuan, sidang.link, (select dosen.nama from sidang where sidang.dosen_png = dosen.id_dosen) as nama_peng')->from('sidang');
+        $this->db->select('mahasiswa.*, kp.dosen_pemb as id_dosen, perusahaan.nama as nama_per, kp.penugasan, sidang.id_sidang, sidang.judul, sidang.tanggal, sidang.tgl_pengajuan, sidang.link, (select dosen.nama from sidang where sidang.dosen_png = dosen.id_dosen) as nama_peng')->from('sidang');
         $this->db->join('kp', 'kp.id_kp=sidang.id_kp', 'left');
         $this->db->join('mahasiswa', 'mahasiswa.id_mahasiswa=sidang.id_mahasiswa', 'left');
         $this->db->join('perusahaan', 'perusahaan.id_perusahaan=kp.id_perusahaan', 'left');
@@ -125,7 +126,7 @@ class Model_All extends CI_Model
     public function get_sidang_mhs()
     {
         $mhs = $this->model_all->get_mahasiswaid();
-        $this->db->select('mahasiswa.*, kp.dosen_pemb as id_dosen, perusahaan.nama as nama_per, kp.penugasan, (select dosen.nama from kp left join dosen on dosen.id_dosen=kp.dosen_pemb where kp.dosen_pemb = id_dosen) as nama_pemb, sidang.id_sidang, sidang.judul, sidang.tanggal, sidang.tgl_pengajuan, sidang.link, (select dosen.nama from sidang where sidang.dosen_png = dosen.id_dosen) as nama_peng')->from('sidang');
+        $this->db->select('mahasiswa.*, kp.dosen_pemb as id_dosen, perusahaan.nama as nama_per, kp.penugasan, sidang.id_sidang, sidang.judul, sidang.tanggal, sidang.tgl_pengajuan, sidang.link, (select dosen.nama from sidang where sidang.dosen_png = dosen.id_dosen) as nama_peng')->from('sidang');
         $this->db->join('kp', 'kp.id_kp=sidang.id_kp', 'left');
         $this->db->join('mahasiswa', 'mahasiswa.id_mahasiswa=sidang.id_mahasiswa', 'left');
         $this->db->join('perusahaan', 'perusahaan.id_perusahaan=kp.id_perusahaan', 'left');

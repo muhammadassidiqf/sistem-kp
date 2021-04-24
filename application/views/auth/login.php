@@ -12,13 +12,16 @@
     <title>Kerja Praktik ITENAS</title>
 
     <link href="<?= base_url() ?>assets/css/login-styles.css" rel="stylesheet">
-
+    <script src="<?= base_url('assets/vendor/jquery/jquery-3.5.1.min.js') ?>"></script>
+    <script type="text/javascript" src="<?= base_url('assets/vendor/sweetalert/sweetalert2.all.min.js'); ?>"></script>
 </head>
 
 <body>
 
     <section class="Form my-4 mx-5">
         <div class="container">
+            <div class="flash-data-username" data-flashdata="<?= $this->session->flashdata('error_uname') ?>"></div>
+            <div class="flash-data-password" data-flashdata="<?= $this->session->flashdata('error_pass') ?>"></div>
             <div class="row no-gutters">
                 <div class="col-lg-7 px-5 pt-5">
                     <h1 class="logo"> <img src="assets/img/logo(1).png" alt=""> </h1>
@@ -72,6 +75,29 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
     -->
+    <script>
+        $(document).ready(function() {
+            let flashdatauname = $('.flash-data-username').data('flashdata');
+            let flashdatapass = $('.flash-data-password').data('flashdata');
+            if (flashdatauname) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Your Username Incorrect!',
+                    type: 'error'
+                })
+            }
+
+            if (flashdatapass) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Your Password Incorrect!',
+                    type: 'error'
+                })
+            }
+        })
+    </script>
 </body>
 
 </html>

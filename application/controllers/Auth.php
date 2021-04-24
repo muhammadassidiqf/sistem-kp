@@ -46,14 +46,17 @@ class Auth extends CI_Controller
                         'name' => $prof
                     ];
                 }
+                $this->session->set_flashdata('sukses', "Anda berhasil login");
                 $this->session->set_userdata($data);
                 redirect('dashboard');
             } else {
+                $this->session->set_flashdata('error_pass', 'error message');
                 redirect('/');
             }
             // var_dump($username);
             // die;
         } else {
+            $this->session->set_flashdata('error_uname', 'error message');
             redirect('/');
         }
     }

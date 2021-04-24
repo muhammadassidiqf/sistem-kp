@@ -9,7 +9,7 @@
         </div>
 
         <div class="row mb-4">
-
+            <div class="flash-data-success" data-flashdata="<?= $this->session->flashdata('sukses') ?>"></div>
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card shadow h-100 py-2">
                     <div class="card-header h6 mb-0 py-3 font-weight-bold text-uppercase">Sedang KP</div>
@@ -121,3 +121,16 @@
         </footer>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        let flashdatasuccess = $('.flash-data-success').data('flashdata');
+        if (flashdatasuccess) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Sukses!',
+                text: 'Anda Berhasil Login!!',
+                type: 'success'
+            })
+        }
+    })
+</script>
