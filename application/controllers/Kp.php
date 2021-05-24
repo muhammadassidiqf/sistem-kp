@@ -8,22 +8,22 @@ class Kp extends CI_Controller
         parent::__construct();
         $this->load->library('form_validation');
         $this->load->library('session');
-        $this->load->model('model_all');
+        $this->load->model('Model_All');
     }
 
     public function index()
     {
         $user = $this->session->userdata('user');
-        $mhs = $this->model_all->get_mahasiswaid();
+        $mhs = $this->Model_All->get_mahasiswaid();
         $riwayat = $this->db->where('id_mahasiswa', $mhs['id_mahasiswa'])
             ->get('kp')->num_rows();
         $data = [
             'user' => $user,
-            'perusahaan' => $this->model_all->get_perusahaan(),
-            'mhs' => $this->model_all->get_mahasiswaid(),
-            'kp' => $this->model_all->get_kp(),
+            'perusahaan' => $this->Model_All->get_perusahaan(),
+            'mhs' => $this->Model_All->get_mahasiswaid(),
+            'kp' => $this->Model_All->get_kp(),
             'num_kp' => $riwayat,
-            'num_sidang' => $this->model_all->num_sidang(),
+            'num_sidang' => $this->Model_All->num_sidang(),
         ];
         // var_dump($data);
         // die;
@@ -33,15 +33,15 @@ class Kp extends CI_Controller
     public function aju_sidang()
     {
         $user = $this->session->userdata('user');
-        $mhs = $this->model_all->get_mahasiswaid();
+        $mhs = $this->Model_All->get_mahasiswaid();
         $riwayat = $this->db->where('id_mahasiswa', $mhs['id_mahasiswa'])
             ->get('kp')->num_rows();
         $data = [
             'user' => $user,
-            'mhs' => $this->model_all->get_mahasiswaid(),
-            'kp' => $this->model_all->get_kp(),
+            'mhs' => $this->Model_All->get_mahasiswaid(),
+            'kp' => $this->Model_All->get_kp(),
             'num_kp' => $riwayat,
-            'num_sidang' => $this->model_all->num_sidang(),
+            'num_sidang' => $this->Model_All->num_sidang(),
         ];
         $this->template->load('layouts', 'kp/aju_sidang', $data);
         // var_dump($data);
@@ -51,14 +51,14 @@ class Kp extends CI_Controller
     public function bimbingan()
     {
         $user = $this->session->userdata('user');
-        $mhs = $this->model_all->get_mahasiswaid();
+        $mhs = $this->Model_All->get_mahasiswaid();
         $riwayat = $this->db->where('id_mahasiswa', $mhs['id_mahasiswa'])
             ->get('kp')->num_rows();
         $data = [
             'user' => $user,
             'num_kp' => $riwayat,
-            'kp' => $this->model_all->get_kp_dsn(),
-            'num_sidang' => $this->model_all->num_sidang(),
+            'kp' => $this->Model_All->get_kp_dsn(),
+            'num_sidang' => $this->Model_All->num_sidang(),
         ];
         // var_dump($data);
         // die;
@@ -68,15 +68,15 @@ class Kp extends CI_Controller
     public function bimbingan_mhs()
     {
         $user = $this->session->userdata('user');
-        $mhs = $this->model_all->get_mahasiswaid();
+        $mhs = $this->Model_All->get_mahasiswaid();
         $riwayat = $this->db->where('id_mahasiswa', $mhs['id_mahasiswa'])
             ->get('kp')->num_rows();
         $data = [
             'user' => $user,
             'num_kp' => $riwayat,
-            'kp' => $this->model_all->get_kp(),
-            'bimbingan' => $this->model_all->get_bimbmhs(),
-            'num_sidang' => $this->model_all->num_sidang(),
+            'kp' => $this->Model_All->get_kp(),
+            'bimbingan' => $this->Model_All->get_bimbmhs(),
+            'num_sidang' => $this->Model_All->num_sidang(),
         ];
         // var_dump($data);
         // die;
@@ -86,15 +86,15 @@ class Kp extends CI_Controller
     public function edit_bimbingan($id)
     {
         $user = $this->session->userdata('user');
-        $mhs = $this->model_all->get_mahasiswaid();
+        $mhs = $this->Model_All->get_mahasiswaid();
         $riwayat = $this->db->where('id_mahasiswa', $mhs['id_mahasiswa'])
             ->get('kp')->num_rows();
         $data = [
             'user' => $user,
             'num_kp' => $riwayat,
-            'kp' => $this->model_all->get_kp(),
-            'bimbingan' => $this->model_all->get_bimbid($id),
-            'num_sidang' => $this->model_all->num_sidang(),
+            'kp' => $this->Model_All->get_kp(),
+            'bimbingan' => $this->Model_All->get_bimbid($id),
+            'num_sidang' => $this->Model_All->num_sidang(),
         ];
         // var_dump($data);
         // die;
@@ -104,15 +104,15 @@ class Kp extends CI_Controller
     public function sidang()
     {
         $user = $this->session->userdata('user');
-        $mhs = $this->model_all->get_mahasiswaid();
+        $mhs = $this->Model_All->get_mahasiswaid();
         $riwayat = $this->db->where('id_mahasiswa', $mhs['id_mahasiswa'])
             ->get('kp')->num_rows();
         $data = [
             'user' => $user,
             'num_kp' => $riwayat,
-            'kp' => $this->model_all->get_kp(),
-            'sidang' => $this->model_all->get_sidang_dsn(),
-            'num_sidang' => $this->model_all->num_sidang(),
+            'kp' => $this->Model_All->get_kp(),
+            'sidang' => $this->Model_All->get_sidang_dsn(),
+            'num_sidang' => $this->Model_All->num_sidang(),
         ];
         // var_dump($data);
         // die;
@@ -122,15 +122,15 @@ class Kp extends CI_Controller
     public function sidang_mhs()
     {
         $user = $this->session->userdata('user');
-        $mhs = $this->model_all->get_mahasiswaid();
+        $mhs = $this->Model_All->get_mahasiswaid();
         $riwayat = $this->db->where('id_mahasiswa', $mhs['id_mahasiswa'])
             ->get('kp')->num_rows();
         $data = [
             'user' => $user,
             'num_kp' => $riwayat,
-            'kp' => $this->model_all->get_kp(),
-            'sidang' => $this->model_all->get_sidang_mhs(),
-            'num_sidang' => $this->model_all->num_sidang(),
+            'kp' => $this->Model_All->get_kp(),
+            'sidang' => $this->Model_All->get_sidang_mhs(),
+            'num_sidang' => $this->Model_All->num_sidang(),
         ];
         // var_dump($data);
         // die;
@@ -147,7 +147,7 @@ class Kp extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             redirect('pengajuan');
         } else {
-            $mhs = $this->model_all->get_mahasiswaid();
+            $mhs = $this->Model_All->get_mahasiswaid();
             $data = [
                 'id_mahasiswa' => $mhs['id_mahasiswa'],
                 'id_perusahaan' => $_POST['perusahaan'],
@@ -161,9 +161,9 @@ class Kp extends CI_Controller
             // var_dump($data);
             // die;
             if ($kp) {
-                $this->model_all->pengirim();
-                $this->model_all->pemeriksa();
-                $this->model_all->pemeriksa2();
+                $this->Model_All->pengirim();
+                $this->Model_All->pemeriksa();
+                $this->Model_All->pemeriksa2();
                 redirect('dashboard');
             }
         }
@@ -178,7 +178,7 @@ class Kp extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             redirect('pengajuan_sidang');
         } else {
-            $mhs = $this->model_all->get_mahasiswaid();
+            $mhs = $this->Model_All->get_mahasiswaid();
             $data = [
                 'id_mahasiswa' => $mhs['id_mahasiswa'],
                 'id_kp' => $_POST['id_kp'],
@@ -192,9 +192,9 @@ class Kp extends CI_Controller
             // die;
             $sidang = $this->db->insert('sidang', $data);
             if ($sidang) {
-                $this->model_all->pengirim_sidang();
-                $this->model_all->pemeriksa_sidang();
-                $this->model_all->pemeriksa2_sidang();
+                $this->Model_All->pengirim_sidang();
+                $this->Model_All->pemeriksa_sidang();
+                $this->Model_All->pemeriksa2_sidang();
                 redirect('dashboard');
             }
         }
@@ -203,18 +203,18 @@ class Kp extends CI_Controller
     public function edit_kp($id)
     {
         $user = $this->session->userdata('user');
-        $mhs = $this->model_all->get_mahasiswaid();
+        $mhs = $this->Model_All->get_mahasiswaid();
         $riwayat = $this->db->where('id_mahasiswa', $mhs['id_mahasiswa'])
             ->get('kp')->num_rows();
         $data = [
             'user' => $user,
             'num_kp' => $riwayat,
-            'kp' => $this->model_all->get_kpid($id),
-            'dosen' => $this->model_all->get_dosen(),
-            'num_sidang' => $this->model_all->num_sidang(),
+            'kp' => $this->Model_All->get_kpid($id),
+            'dosen' => $this->Model_All->get_dosen(),
+            'num_sidang' => $this->Model_All->num_sidang(),
         ];
         if ($user['role'] == 'Dosen' || $user['role'] == 'Koordinator') {
-            $data['prof'] = $this->model_all->get_profil_dsn();
+            $data['prof'] = $this->Model_All->get_profil_dsn();
         }
         // var_dump($data);
         // die;
@@ -224,18 +224,18 @@ class Kp extends CI_Controller
     public function edit_sidang($id)
     {
         $user = $this->session->userdata('user');
-        $mhs = $this->model_all->get_mahasiswaid();
+        $mhs = $this->Model_All->get_mahasiswaid();
         $riwayat = $this->db->where('id_mahasiswa', $mhs['id_mahasiswa'])
             ->get('kp')->num_rows();
         $data = [
             'user' => $user,
             'num_kp' => $riwayat,
-            'sidang' => $this->model_all->get_sidangid($id),
-            'dosen' => $this->model_all->get_dosen(),
-            'num_sidang' => $this->model_all->num_sidang(),
+            'sidang' => $this->Model_All->get_sidangid($id),
+            'dosen' => $this->Model_All->get_dosen(),
+            'num_sidang' => $this->Model_All->num_sidang(),
         ];
         if ($user['role'] == 'Dosen' || $user['role'] == 'Koordinator') {
-            $data['prof'] = $this->model_all->get_profil_dsn();
+            $data['prof'] = $this->Model_All->get_profil_dsn();
         }
         // var_dump($data);
         // die;

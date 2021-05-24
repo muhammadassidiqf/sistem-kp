@@ -8,13 +8,13 @@ class Perusahaan extends CI_Controller
         parent::__construct();
         $this->load->library('form_validation');
         $this->load->library('session');
-        $this->load->model('model_all');
+        $this->load->model('Model_All');
     }
 
     public function index()
     {
         $user = $this->session->userdata('user');
-        $mhs = $this->model_all->get_mahasiswaid();
+        $mhs = $this->Model_All->get_mahasiswaid();
         $riwayat = $this->db->where('id_mahasiswa', $mhs['id_mahasiswa'])
             ->get('kp')->num_rows();
         $data = [

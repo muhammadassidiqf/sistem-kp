@@ -8,22 +8,22 @@ class Profil extends CI_Controller
         parent::__construct();
         $this->load->library('form_validation');
         $this->load->library('session');
-        $this->load->model('model_all');
+        $this->load->model('Model_All');
     }
 
     public function index()
     {
         $user = $this->session->userdata('user');
-        $mhs = $this->model_all->get_mahasiswaid();
+        $mhs = $this->Model_All->get_mahasiswaid();
         $riwayat = $this->db->where('id_mahasiswa', $mhs['id_mahasiswa'])
             ->get('kp')->num_rows();
         if ($user['role'] == 'Mahasiswa') {
             $data = [
                 'user' => $user,
-                'prof' => $this->model_all->get_profil(),
+                'prof' => $this->Model_All->get_profil(),
                 'num_kp' => $riwayat,
-                'num_sidang' => $this->model_all->num_sidang(),
-                'kp' => $this->model_all->get_kp(),
+                'num_sidang' => $this->Model_All->num_sidang(),
+                'kp' => $this->Model_All->get_kp(),
             ];
             // var_dump($data);
             // die;
@@ -31,7 +31,7 @@ class Profil extends CI_Controller
         } elseif ($user['role'] == 'Dosen' || $user['role'] == 'Koordinator') {
             $data = [
                 'user' => $user,
-                'prof' => $this->model_all->get_profil_dsn(),
+                'prof' => $this->Model_All->get_profil_dsn(),
             ];
             $this->template->load('layouts', 'profil/dosen', $data);
         }
@@ -81,15 +81,15 @@ class Profil extends CI_Controller
     public function masuk()
     {
         $user = $this->session->userdata('user');
-        $mhs = $this->model_all->get_mahasiswaid();
+        $mhs = $this->Model_All->get_mahasiswaid();
         $riwayat = $this->db->where('id_mahasiswa', $mhs['id_mahasiswa'])
             ->get('kp')->num_rows();
         $data = [
             'user' => $user,
             'num_kp' => $riwayat,
-            'num_sidang' => $this->model_all->num_sidang(),
-            'masuk' => $this->model_all->masuk(),
-            'kp' => $this->model_all->get_kp(),
+            'num_sidang' => $this->Model_All->num_sidang(),
+            'masuk' => $this->Model_All->masuk(),
+            'kp' => $this->Model_All->get_kp(),
         ];
         // var_dump($data);
         // die;
