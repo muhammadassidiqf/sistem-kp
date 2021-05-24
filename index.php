@@ -54,6 +54,20 @@
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+$domainName = $_SERVER['HTTP_HOST'] . '/';
+$domain = $protocol . $domainName;
+switch ($domain) {
+	case 'http://localhost/kp/':
+		$env = 'development';
+		break;
+	case 'https://kp-itenas.online/':
+		$env = 'production';
+		break;
+	default:
+		$env = 'development';
+		break;
+}
 define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
 /*
@@ -64,6 +78,7 @@ define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'developm
  * Different environments will require different levels of error reporting.
  * By default development will show errors but testing and live will hide them.
  */
+
 switch (ENVIRONMENT) {
 	case 'development':
 		error_reporting(-1);
@@ -79,6 +94,7 @@ switch (ENVIRONMENT) {
 		} else {
 			error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_USER_NOTICE);
 		}
+		define("BASEURL", "https://kp-itenas.online/");
 		break;
 
 	default:
