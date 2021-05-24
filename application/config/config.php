@@ -23,7 +23,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'https://kp-itenas.online/';
+$config['base_url'] = 'http://kp-itenas.online/';
 date_default_timezone_set('Asia/Jakarta');
 /*
 |--------------------------------------------------------------------------
