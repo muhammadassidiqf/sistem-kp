@@ -145,6 +145,7 @@ class Kp extends CI_Controller
         $this->form_validation->set_rules('perusahaan', 'perusahaan', 'required');
         $this->form_validation->set_rules('penugasan', 'penugasan', 'required');
         if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('error', "Anda Gagal mengajukan Kerja Praktik");
             redirect('pengajuan');
         } else {
             $mhs = $this->Model_All->get_mahasiswaid();
@@ -164,6 +165,7 @@ class Kp extends CI_Controller
                 $this->Model_All->pengirim();
                 $this->Model_All->pemeriksa();
                 $this->Model_All->pemeriksa2();
+                $this->session->set_flashdata('success', "Anda berhasil mengajukan Kerja Praktik");
                 redirect('dashboard');
             }
         }
@@ -176,6 +178,7 @@ class Kp extends CI_Controller
         $this->form_validation->set_rules('tgl_pengajuan', 'tgl_pengajuan', 'required');
         $this->form_validation->set_rules('judul', 'judul', 'required');
         if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('error', "Anda Gagal menambahkan pengejuan");
             redirect('pengajuan_sidang');
         } else {
             $mhs = $this->Model_All->get_mahasiswaid();
@@ -195,6 +198,7 @@ class Kp extends CI_Controller
                 $this->Model_All->pengirim_sidang();
                 $this->Model_All->pemeriksa_sidang();
                 $this->Model_All->pemeriksa2_sidang();
+                $this->session->set_flashdata('success', "Anda berhasil menambahkan pengejuan");
                 redirect('dashboard');
             }
         }
@@ -249,7 +253,7 @@ class Kp extends CI_Controller
             $this->db->set('statuspemeriksa', 'Disetujui')->where('id_kp', $id)->update('pemeriksa');
             $this->db->set('statuspemeriksa2', 'Menunggu')->where('id_kp', $id)->update('pemeriksa2');
         }
-        $this->session->set_flashdata('sukses_pemeriksa', "Pengajuan telah disetujui oleh Anda sebagai pemeriksa!");
+        $this->session->set_flashdata('success', "Pengajuan telah disetujui oleh Anda sebagai pemeriksa!");
         redirect('masuk');
     }
 
@@ -260,7 +264,7 @@ class Kp extends CI_Controller
             $this->db->set('statuspemeriksa2', 'Disetujui')->where('id_kp', $id)->update('pemeriksa2');
             $this->db->set('statuspengirim', 'Disetujui')->where('id_kp', $id)->update('pengirim');
         }
-        $this->session->set_flashdata('sukses_pemeriksa', "Pengajuan telah disetujui oleh Anda sebagai pemeriksa!");
+        $this->session->set_flashdata('success', "Pengajuan telah disetujui oleh Anda sebagai pemeriksa!");
         redirect('masuk');
     }
 
@@ -273,14 +277,14 @@ class Kp extends CI_Controller
             $this->db->set('statuspemeriksa', 'Tidak Disetujui')->where('id_kp', $id)->update('pemeriksa');
             $this->db->set('statuspengirim', 'Tidak Disetujui')->where('id_kp', $id)->update('pengirim');
         }
-        $this->session->set_flashdata('gagal_pemeriksa', "Pengajuan tidak disetujui oleh Anda sebagai pemeriksa!");
+        $this->session->set_flashdata('success', "Pengajuan tidak disetujui oleh Anda sebagai pemeriksa!");
         redirect('masuk');
     }
 
     public function update_pemb($id)
     {
         $this->db->set('dosen_pemb', $_POST['dosen_pemb'])->where('id_kp', $id)->update('kp');
-        $this->session->set_flashdata('sukses_pemeriksa', "Pengajuan telah disetujui oleh Anda sebagai pemeriksa!");
+        $this->session->set_flashdata('success', "Data berhasil diperbarui");
         redirect('masuk');
     }
 
@@ -291,7 +295,7 @@ class Kp extends CI_Controller
             $this->db->set('statuspemeriksa', 'Disetujui')->where('id_sidang', $id)->update('pemeriksa');
             $this->db->set('statuspemeriksa2', 'Menunggu')->where('id_sidang', $id)->update('pemeriksa2');
         }
-        $this->session->set_flashdata('sukses_pemeriksa', "Pengajuan telah disetujui oleh Anda sebagai pemeriksa!");
+        $this->session->set_flashdata('success', "Pengajuan telah disetujui oleh Anda sebagai pemeriksa!");
         redirect('masuk');
     }
 
@@ -302,7 +306,7 @@ class Kp extends CI_Controller
             $this->db->set('statuspemeriksa2', 'Disetujui')->where('id_sidang', $id)->update('pemeriksa2');
             $this->db->set('statuspengirim', 'Disetujui')->where('id_sidang', $id)->update('pengirim');
         }
-        $this->session->set_flashdata('sukses_pemeriksa', "Pengajuan telah disetujui oleh Anda sebagai pemeriksa!");
+        $this->session->set_flashdata('success', "Pengajuan telah disetujui oleh Anda sebagai pemeriksa!");
         redirect('masuk');
     }
 
@@ -315,14 +319,14 @@ class Kp extends CI_Controller
             $this->db->set('statuspemeriksa', 'Tidak Disetujui')->where('id_sidang', $id)->update('pemeriksa');
             $this->db->set('statuspengirim', 'Tidak Disetujui')->where('id_sidang', $id)->update('pengirim');
         }
-        $this->session->set_flashdata('gagal_pemeriksa', "Pengajuan tidak disetujui oleh Anda sebagai pemeriksa!");
+        $this->session->set_flashdata('success', "Pengajuan tidak disetujui oleh Anda sebagai pemeriksa!");
         redirect('masuk');
     }
 
     public function update_peng($id)
     {
         $this->db->set('dosen_png', $_POST['dosen_peng'])->where('id_sidang', $id)->update('sidang');
-        $this->session->set_flashdata('sukses_pemeriksa', "Pengajuan telah disetujui oleh Anda sebagai pemeriksa!");
+        $this->session->set_flashdata('success', "Data berhasil diperbarui");
         redirect('masuk');
     }
 
@@ -343,6 +347,7 @@ class Kp extends CI_Controller
             // var_dump($data);
             // die;
             $this->db->insert('bimbingan', $data);
+            $this->session->set_flashdata('success', "Bimbingan berhasil ditambahkan");
             redirect('dashboard');
         }
     }
@@ -350,21 +355,21 @@ class Kp extends CI_Controller
     function acc_bimbingan($id)
     {
         $this->db->set('status', 'Disetujui')->where('id_bimbingan', $id)->update('bimbingan');
-        $this->session->set_flashdata('sukses_pemeriksa', "Pengajuan telah disetujui oleh Anda sebagai pemeriksa!");
+        $this->session->set_flashdata('success', "Bimbingan telah disetujui oleh Anda");
         redirect('bimbingan');
     }
 
     function dec_bimbingan($id)
     {
         $this->db->set('status', 'Tidak Disetujui')->where('id_bimbingan', $id)->update('bimbingan');
-        $this->session->set_flashdata('sukses_pemeriksa', "Pengajuan telah disetujui oleh Anda sebagai pemeriksa!");
+        $this->session->set_flashdata('success', "Bimbingan tidak disetujui oleh Anda");
         redirect('bimbingan');
     }
 
     function edit_link($id)
     {
         $this->db->set('link', $_POST['link'])->where('id_sidang', $id)->update('sidang');
-        $this->session->set_flashdata('sukses_pemeriksa', "Pengajuan telah disetujui oleh Anda sebagai pemeriksa!");
-        redirect('sidang');
+        $this->session->set_flashdata('success', "Data berhasil diperbarui");
+        redirect('dashboard');
     }
 }

@@ -48,13 +48,13 @@
                     <label for="nrp" class="col-sm-4 col-form-label">Tanggal Pengajuan Sidang</label>
                     <div class="form-row">
                         <div class="col-lg-7">
-                            <input type="date" name="tgl_pengajuan" placeholder="Judul" class="form-control my-0 p-4">
+                            <input type="date" name="tgl_pengajuan" placeholder="Judul" class="form-control my-0 p-4" required>
                         </div>
                     </div>
                     <label for="nrp" class="col-sm-4 col-form-label">Judul yang diusulkan</label>
                     <div class="form-row">
                         <div class="col-lg-7">
-                            <input type="text" name="judul" placeholder="Judul" class="form-control my-0 p-4">
+                            <input type="text" name="judul" placeholder="Judul" class="form-control my-0 p-4" required>
                         </div>
                     </div>
                     <div class="form-row">

@@ -60,7 +60,9 @@
 </style>
 
 <body id="body-pd">
-
+    <div class=" flash-data-suc" data-flashdata="<?= $this->session->flashdata('success') ?>">
+    </div>
+    <div class="flash-data-err" data-flashdata="<?= $this->session->flashdata('error') ?>"></div>
     <div id="wrapper">
 
         <!-- header -->
@@ -170,6 +172,28 @@
         </div>
     </div>
     <script>
+        $(document).ready(function() {
+            let flashDataSuc = $('.flash-data-suc').data('flashdata');
+            let flashDataError = $('.flash-data-err').data('flashdata');
+            if (flashDataSuc) {
+                Swal.fire({
+                    icon: 'success',
+                    type: 'success',
+                    title: $('.flash-data-suc').data('flashdata'),
+                    showConfirmButton: false,
+                    timer: 5000
+                })
+            }
+            if (flashDataError) {
+                Swal.fire({
+                    icon: 'error',
+                    type: 'error',
+                    title: $('.flash-data-err').data('flashdata'),
+                    showConfirmButton: false,
+                    timer: 5000
+                })
+            }
+        });
         $(document).ready(function() {
             $('#datatable').DataTable({
                 "responsive": true,

@@ -32,13 +32,13 @@
 
                         <div class="form-row">
                             <div class="col-lg-7">
-                                <input type="text" name="username" placeholder="Username" class="form-control my-3 p-4">
+                                <input type="text" name="username" placeholder="Username" class="form-control my-3 p-4" required>
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="col-lg-7">
-                                <input type="password" name="password" placeholder="******" class="form-control my-3 p-4">
+                                <input type="password" name="password" placeholder="******" class="form-control my-3 p-4" required>
                             </div>
                         </div>
 
